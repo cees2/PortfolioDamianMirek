@@ -1,0 +1,46 @@
+.header{
+    width: 100%;
+    background-color: rgb(45, 80, 138);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.portfolio a{
+    display: inline-block;
+    margin-left: 3rem;
+    font-size: 2rem;
+    padding: 15px 0;
+    color: white;
+    text-decoration: none;
+}
+
+.headerList{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    margin-right: 3rem;
+    font-size: 1.5rem;
+}
+
+.headerList li a{
+    margin: 0 1rem;
+    color: white;
+    text-decoration: none;
+}
+
+.headerList li a:hover {
+    cursor: pointer;
+    color:rgb(200, 205, 213);
+}
+
+.active{
+    color: rgb(150, 163, 183);
+}
+
+.numOfTasks{
+    background-color: rgb(31, 10, 88);
+    padding: 2px 10px;
+    border-radius: 40%;
+}

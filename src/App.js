@@ -1,24 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useContext } from "react";
+import { Route, Switch, Redirect,} from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import TasksToDo from "./pages/TasksToDo";
+import Layout from "./components/Layout/Layout";
+import AddToDo from "./pages/AddToDo";
+import TaskContext from "./store/tasks-context";
 
 function App() {
+  const taskCtx = useContext(TaskContext);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        "https://react-http-d03fd-default-rtdb.europe-west1.firebasedatabase.app/tasksToDo.json"
+      );
+      const responseData = await response.json();
+
+      const temp = [];
+
+      for (const key in responseData) {
+        temp.push(responseData[key]);
+      }
+      taskCtx.setTasks(temp);
+    };
+
+    fetchData();
+  }, []); // do poprawy
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <Layout>
+      <Switch>
+        <Route path="/" exact>
+          <Redirect to="/home" />
+        </Route>
+        <Route path="/home">
+          <HomePage />
+        </Route>
+        <Route path="/newToDo">
+          <AddToDo />
+        </Route>
+        <Route path="/toDoApp">
+          <TasksToDo />
+        </Route>
+      </Switch>
+    </Layout>
   );
 }
 

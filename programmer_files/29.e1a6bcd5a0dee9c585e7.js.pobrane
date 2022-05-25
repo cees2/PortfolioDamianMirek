@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[29],{871:function(t,n){t.exports={functional:!0,render(t,n){const{_c:l,_v:c,data:data,children:e=[]}=n,{class:o,staticClass:r,style:style,staticStyle:w,attrs:d={},...h}=data;return l("svg",{class:[o,r],style:[style,w],attrs:Object.assign({viewBox:"0 0 16 16",fill:"none",xmlns:"http://www.w3.org/2000/svg"},d),...h},e.concat([l("path",{attrs:{d:"M.667 3h14.666v10H.667V3z",fill:"#DD2C00"}}),l("path",{attrs:{d:"M.667 5.667h14.666v4.666H.667V5.667z",fill:"#FFC107"}})]))}}}}]);
+//# sourceMappingURL=29.e1a6bcd5a0dee9c585e7.js.map

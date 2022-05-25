@@ -1,0 +1,41 @@
+.taskListItem{
+    width: 50%;
+    height: 10rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(67, 114, 99);
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 8px 8px 17px -7px rgba(66, 68, 90, 1);
+}
+
+.taskListItem h2{
+    flex-basis: 40%;
+}
+
+.taskListItem p{
+    flex-basis: 40%;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.taskListItem button{
+    width: 30%;
+    height: 2rem;
+    margin-bottom: 5px;
+    background-color: rgb(133, 62, 62);
+    color: white;
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+.taskListItem button:hover{
+    cursor: pointer;
+    background-color: rgb(121, 57, 57);
+}
+
+.priority{
+    font-size: 24px;
+}

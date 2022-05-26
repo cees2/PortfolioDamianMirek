@@ -9,6 +9,7 @@
     margin-bottom: 1rem;
     border-radius: 8px;
     box-shadow: 8px 8px 17px -7px rgba(66, 68, 90, 1);
+    color: white;
 }
 
 .taskListItem h2{
@@ -25,7 +26,7 @@
     width: 30%;
     height: 2rem;
     margin-bottom: 5px;
-    background-color: rgb(133, 62, 62);
+    background-color: #223240;
     color: white;
     font-size: 12px;
     border-radius: 8px;
@@ -33,7 +34,7 @@
 
 .taskListItem button:hover{
     cursor: pointer;
-    background-color: rgb(121, 57, 57);
+    background-color: #3B8C66;
 }
 
 .priority{

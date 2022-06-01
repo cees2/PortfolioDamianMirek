@@ -1,13 +1,13 @@
-form{
+.taskInput{
     background-color: #60BF81;
     color: white;
-    width: 35%;
+    width: 55%;
     margin: 10rem auto 0;
     border-radius: 10px;
     box-shadow: 8px 8px 17px -7px rgba(66, 68, 90, 1);
 }
 
-form div label{
+.taskInput div label{
     display: block;
     font-size: 26px;
     margin: 1.5rem 0 0 .5rem;

@@ -16,8 +16,8 @@ const Home = () => {
             Hi there, I'm looking for an internship as a frontend developer and
             this is my portfolio. I'm interested in JavaScript and React
             library. In the future I would like to develop my skills in frontend
-            and backend as well. Feel free to test my to do app. Linkedin and
-            github links below.{" "}
+            and backend as well. Feel free to register to my app, log in, and
+            test my to do app. Linkedin and github links below.{" "}
           </p>
         </div>
         <div className={classes.icons}>

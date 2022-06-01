@@ -3,12 +3,14 @@ import classes from "./NewToDo.module.css";
 import { useRef, useState } from "react";
 import { useContext } from "react";
 import TaskContext from "./../../store/tasks-context";
+import AuthContext from "../../store/auth-context";
 
 const NewToDo = () => {
   const [error, setError] = useState(null);
   const taskRef = useRef();
   const priorityRef = useRef();
   const taskCtx = useContext(TaskContext);
+  const authCtx = useContext(AuthContext);
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -18,7 +20,7 @@ const NewToDo = () => {
           singleTask.task.toUpperCase() === taskRef.current.value.toUpperCase()
       )
     ) {
-      setError('This task already exists.');
+      setError("This task already exists.");
       return;
     } else if (taskRef.current.value.trim() === "") {
       setError("You can't add empty task.");
@@ -27,15 +29,17 @@ const NewToDo = () => {
       setError(false);
       const dataToBeSend = {
         id: Math.random(),
+        userId: authCtx.userLocalId,
         task: taskRef.current.value,
         priority: priorityRef.current.value,
       };
+
       taskCtx.addTask(dataToBeSend);
     }
   };
 
   return (
-    <form onSubmit={formSubmitHandler}>
+    <form onSubmit={formSubmitHandler} className={classes.taskInput}>
       <div className={classes.taskToDo}>
         <label htmlFor="task">Task</label>
         <input type="text" id="task" ref={taskRef} />

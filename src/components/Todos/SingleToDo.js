@@ -6,7 +6,19 @@ const SingleToDo = (props) => {
   const taskCtx = useContext(TaskContext);
 
   const deleteTask = () => {
-    taskCtx.removeTask(props.id);
+    let idOfItemInDatabase;
+    fetch(
+      "https://react-http-d03fd-default-rtdb.europe-west1.firebasedatabase.app/tasksToDo.json"
+    )
+      .then((response) => response.json())
+      .then((responseData) => {
+        for (const key in responseData) {
+          if (responseData[key].id === props.id) {
+            idOfItemInDatabase = key;
+            taskCtx.removeTask(idOfItemInDatabase, props.id);
+          }
+        }
+      });
   };
 
   return (

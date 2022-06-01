@@ -1,13 +1,17 @@
-import React, {useEffect, useContext } from "react";
-import { Route, Switch, Redirect,} from "react-router-dom";
+import React, { useEffect, useContext } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import TasksToDo from "./pages/TasksToDo";
 import Layout from "./components/Layout/Layout";
 import AddToDo from "./pages/AddToDo";
 import TaskContext from "./store/tasks-context";
+import Login from "./pages/Login";
+import CreateAccount from "./pages/CreateAccount";
+import AuthContext from "./store/auth-context";
 
 function App() {
   const taskCtx = useContext(TaskContext);
+  const authCtx = useContext(AuthContext);
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -18,15 +22,17 @@ function App() {
       const temp = [];
 
       for (const key in responseData) {
-        temp.push(responseData[key]);
+        if (responseData[key].userId === authCtx.userLocalId) {
+          temp.push(responseData[key]);
+        }
       }
       taskCtx.setTasks(temp);
     };
 
     fetchData();
-  }, []); // do poprawy
-  return (
+  }, [authCtx.userLocalId, authCtx.token]); // do poprawy
 
+  return (
     <Layout>
       <Switch>
         <Route path="/" exact>
@@ -35,11 +41,21 @@ function App() {
         <Route path="/home">
           <HomePage />
         </Route>
-        <Route path="/newToDo">
-          <AddToDo />
+        {authCtx.token && (
+          <Route path="/newToDo">
+            <AddToDo />
+          </Route>
+        )}
+        {authCtx.token && (
+          <Route path="/toDoApp">
+            <TasksToDo />
+          </Route>
+        )}
+        <Route path="/Login">
+          <Login />
         </Route>
-        <Route path="/toDoApp">
-          <TasksToDo />
+        <Route path="/CreateAccount">
+          <CreateAccount />
         </Route>
       </Switch>
     </Layout>

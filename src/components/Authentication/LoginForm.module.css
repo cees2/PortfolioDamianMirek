@@ -1,8 +1,8 @@
 .loginWrapper{
     margin: 10rem auto 0;
     width: 60%;
-    background-color: green;
-    border-radius: 6px;
+    background-color: #506266;
+    border-radius: 12px;
     align-items: center;
 }
 
@@ -45,9 +45,25 @@ form.loginInput{
     border-radius: 6px;
     width: 62%;
     padding: 10px 20px;
+    background-color: #A3AB78;
+    border: none;
+}
+
+.submitButton button:hover{
+    background-color: #7f8460;
+    cursor: pointer;
 }
 
 .toNewAccount{
     color: white;
     text-decoration: none;
+}
+
+a{
+    text-decoration: none;
+
+}
+
+.errorParagraph{
+    color: white;
 }

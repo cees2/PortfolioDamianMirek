@@ -33,7 +33,6 @@ const NewToDo = () => {
         task: taskRef.current.value,
         priority: priorityRef.current.value,
       };
-
       taskCtx.addTask(dataToBeSend);
     }
   };

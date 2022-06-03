@@ -8,18 +8,27 @@ const AuthContext = createContext({
 });
 
 export const AuthContextProvider = (props) => {
-  const [token, setToken] = useState(""); // do poprawy
-  const [userLocalId, setUserLocalId] = useState("");
+  const tokenInitialValue = localStorage.getItem('token') ? localStorage.getItem('token') : null;
+  const userIdInitialValue = localStorage.getItem('localId') ? localStorage.getItem('localId') : null;
+  const [token, setToken] = useState(tokenInitialValue);
+  const [userLocalId, setUserLocalId] = useState(userIdInitialValue);
 
   // tutaj ma byc informacja czy zalogowano:
 
   const login = (token, userId) => {
     setToken((prevToken) => (prevToken = token));
     setUserLocalId((prevId) => (prevId = userId));
+
+    localStorage.setItem("token", token);
+    localStorage.setItem("localId", userId);
   };
 
   const logout = () => {
     setToken("");
+    setUserLocalId('');
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("localId");
   };
 
   const authObject = {

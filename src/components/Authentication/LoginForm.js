@@ -67,6 +67,7 @@ const LoginForm = (props) => {
       })
       .then((responseData) => {
         authCtx.login(responseData.idToken, responseData.localId);
+        console.log(responseData);
         history.replace("/home");
       })
       .catch((message) => {

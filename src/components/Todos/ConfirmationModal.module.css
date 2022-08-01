@@ -69,3 +69,15 @@
     height: 50vh;
   }
 }
+
+@media (max-width: 768px) {
+  .modalWrapper {
+    height: 30vh;
+    width: 95%;
+  }
+
+  .modalWrapper h3 {
+    padding: 0 1rem;
+    text-align: center;
+  }
+}

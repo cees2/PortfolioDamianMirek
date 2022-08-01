@@ -62,7 +62,6 @@
   }
 
   .icons {
-    position: fixed;
     width: 100%;
     left: 0;
     bottom: 2rem;
@@ -71,5 +70,12 @@
   .description {
     font-size: 24px;
     padding: 0 1rem;
+  }
+}
+
+@media (orientation: landscape) {
+  .icons {
+    position: static;
+    margin-top: 1rem;
   }
 }

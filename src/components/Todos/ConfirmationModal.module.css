@@ -62,3 +62,10 @@
 .rejectDeleteButton {
   background: rgb(232, 64, 8);
 }
+
+@media (orientation: landscape) {
+  .modalWrapper {
+    width: 95%;
+    height: 50vh;
+  }
+}

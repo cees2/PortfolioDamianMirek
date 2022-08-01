@@ -27,13 +27,18 @@ const NewToDo = () => {
       return;
     } else {
       setError(false);
-      const dataToBeSend = {
+      const dataToBeSent = {
         id: Math.random(),
         userId: authCtx.userLocalId,
-        task: taskRef.current.value,
+        task:
+          taskRef.current.value.slice(0, 1).toUpperCase() +
+          taskRef.current.value.slice(1),
         priority: priorityRef.current.value,
+        date: new Date(),
+        //or navigator.language
       };
-      taskCtx.addTask(dataToBeSend);
+      taskCtx.addTask(dataToBeSent);
+      taskRef.current.value = "";
     }
   };
 

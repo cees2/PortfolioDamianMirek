@@ -1,0 +1,64 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+.modalWrapper {
+  z-index: 1001;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 20%;
+  width: 50%;
+  background-color: rgb(67, 114, 99);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10px;
+  animation: modalAnimation 0.1s linear;
+}
+
+@keyframes modalAnimation {
+  0% {
+    transform: translate(-50%, -50%) scale(95%);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(100%);
+  }
+}
+
+.modalQuestion {
+  font-size: 20px;
+}
+
+.modalButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.modalButtons button {
+  font-size: 14px;
+  padding: 8px 40px;
+  border: 1px solid white;
+  border-radius: 6px;
+}
+
+.modalButtons button:hover {
+  cursor: pointer;
+}
+
+.acceptDeleteButton {
+  background: rgb(19, 137, 34);
+}
+
+.rejectDeleteButton {
+  background: rgb(232, 64, 8);
+}

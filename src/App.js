@@ -17,20 +17,23 @@ function App() {
       const response = await fetch(
         "https://react-http-d03fd-default-rtdb.europe-west1.firebasedatabase.app/tasksToDo.json"
       );
+
+      if (!response.ok) throw new Error("Could not fetch data.");
+
       const responseData = await response.json();
 
-      const temp = [];
+      const usersTasks = [];
 
       for (const key in responseData) {
         if (responseData[key].userId === authCtx.userLocalId) {
-          temp.push(responseData[key]);
+          usersTasks.push(responseData[key]);
         }
       }
-      taskCtx.setTasks(temp);
+      taskCtx.setTasks(usersTasks);
     };
 
     fetchData();
-  }, [authCtx.userLocalId, authCtx.token]); // do poprawy
+  }, [authCtx.userLocalId]); // do poprawy
 
   return (
     <Layout>

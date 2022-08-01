@@ -1,17 +1,16 @@
-.listWrapper{
-    margin: 0 auto;
+.listWrapper {
+  margin: 0 auto;
 }
 
-.taskList{
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
+.taskList {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.information{
-    font-size: 26px;
-    color: white;
+.information {
+  font-size: 26px;
+  color: white;
 }

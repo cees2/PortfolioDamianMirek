@@ -1,56 +1,68 @@
-.taskInput{
-    background-color: #60BF81;
-    color: white;
-    width: 55%;
-    margin: 10rem auto 0;
-    border-radius: 10px;
-    box-shadow: 8px 8px 17px -7px rgba(66, 68, 90, 1);
+.taskInput {
+  background-color: #60bf81;
+  color: white;
+  width: 55%;
+  margin: 10rem auto 0;
+  border-radius: 10px;
+  box-shadow: 8px 8px 17px -7px rgba(66, 68, 90, 1);
 }
 
-.taskInput div label{
-    display: block;
-    font-size: 26px;
-    margin: 1.5rem 0 0 .5rem;
+.taskInput div label {
+  display: block;
+  font-size: 26px;
+  margin: 1.5rem 0 0.5rem 0;
 }
 
-.taskToDo, .option{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.taskToDo,
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.taskToDo input, .optionInput{
-    width: 20rem;
-    margin: .5rem 0 0 .5rem;
-    border-radius: 6px;
-    height: 1.5rem;
-    line-height: 1.5rem; 
+.taskToDo input,
+.optionInput {
+  width: 70%;
+  margin: 0.5rem 0 0.5rem 0;
+  border-radius: 6px;
+  height: 2rem;
+  line-height: 1.5rem;
 }
 
-.optionInput{
-    text-align: center;
-    font-size: 20px;
+.optionInput {
+  text-align: center;
+  font-size: 20px;
 }
 
-.submitButton{
-    font-size: 20px;
-    margin: 2rem 0 .5rem;
-    padding: 10px 40px;
-    background-color: #93D94E;
-    border:none;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 6px;
+.submitButton {
+  font-size: 20px;
+  margin: 2rem 0 0.5rem;
+  padding: 10px 40px;
+  background-color: #93d94e;
+  border: none;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 6px;
 }
 
-.submitButton:hover{
-    cursor: pointer;
-    color: white;
+.submitButton:hover {
+  cursor: pointer;
+  color: white;
 }
 
-.errorInformation{
-    color: rgb(243, 208, 208);
-    font-size: 18px;
-    margin: 5px 0;
+.errorInformation {
+  color: white;
+  font-size: 21px;
+  margin: 4px 0;
+}
+
+@media (max-width: 768px) {
+  .taskInput {
+    width: 95%;
+  }
+
+  .submitButton {
+    width: 85%;
+  }
 }

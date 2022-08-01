@@ -1,68 +1,89 @@
-.loginWrapper{
-    margin: 10rem auto 0;
-    width: 60%;
-    background-color: #506266;
-    border-radius: 12px;
-    align-items: center;
+.loginWrapper {
+  margin: 10rem auto 0;
+  width: 60%;
+  background-color: #506266;
+  border-radius: 12px;
+  align-items: center;
 }
 
-form.loginInput{
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    text-align: center;
+form.loginInput {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
 }
 
-.formInput{
-    margin-top: 1rem 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.formInput {
+  margin-top: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.formInput input{
-    width: 60%;
-    border-radius: 6px;
-    padding: 3px;
+.formInput input {
+  width: 60%;
+  border-radius: 6px;
+  padding: 3px;
 }
 
-.formInput label{
-    color: white;
-    margin: 1rem 0 .5rem;
+.formInput label {
+  color: white;
+  margin: 1rem 0 0.5rem;
 }
 
-.formInput input{
-    display: block;
+.formInput input {
+  display: block;
 }
 
-.submitButton{
-    width: 100%;
+.submitButton {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.submitButton button {
+  font-size: 16px;
+  border-radius: 6px;
+  width: 62%;
+  padding: 10px 20px;
+  background-color: #a3ab78;
+  border: none;
+}
+
+.submitButton button:hover {
+  background-color: #7f8460;
+  cursor: pointer;
+}
+
+.toNewAccount {
+  margin-top: 4px;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.errorParagraph {
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .loginWrapper {
+    width: 95%;
+  }
+
+  .formInput input {
+    width: 85%;
+    height: 2rem;
+  }
+
+  .toNewAccount {
     margin: 1rem 0;
-}
+  }
 
-.submitButton button{
-    font-size: 16px;
-    border-radius: 6px;
-    width: 62%;
-    padding: 10px 20px;
-    background-color: #A3AB78;
-    border: none;
-}
-
-.submitButton button:hover{
-    background-color: #7f8460;
-    cursor: pointer;
-}
-
-.toNewAccount{
-    color: white;
-    text-decoration: none;
-}
-
-a{
-    text-decoration: none;
-}
-
-.errorParagraph{
-    color: white;
+  .submitButton button {
+    width: 85%;
+  }
 }

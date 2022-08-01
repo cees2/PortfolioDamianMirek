@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 
 const TaskContext = createContext({
-  //{id: 1, task: 'sss', priority: 'Low', userId: 'dsadsadsadsa'}
+  //{id: 1, task: 'sss', priority: 'Low', userId: '0.98312321', addDate: 01.02.2021}
   tasks: [],
   setTasks: (tasks) => {},
   addTask: (task) => {},
@@ -12,7 +12,6 @@ export const TaskContextProvider = (props) => {
   const [tasksToDo, setTasksToDo] = useState([]);
 
   const addTask = (taskToAdd) => {
-    console.log(taskToAdd);
     setTasksToDo((prevTasks) => [...prevTasks, taskToAdd]);
     fetch(
       "https://react-http-d03fd-default-rtdb.europe-west1.firebasedatabase.app/tasksToDo.json",

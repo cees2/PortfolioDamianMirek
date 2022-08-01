@@ -14,22 +14,39 @@ const LoginForm = (props) => {
   const typeOfComponent = props.type;
   const history = useHistory();
 
-  const formSubmitHandler = (event) => {
+  const checkValidity = function (emailInput, passwordInput) {
+    if (!emailInput.includes("@")) {
+      setError('Email has to include "@" symbol');
+      return false;
+    } else if (emailInput.indexOf("@") === 0) {
+      setError("Email can not start with '@' symbol");
+      return false;
+    } else if (!emailInput.includes(".")) {
+      setError('Email has to include "."(dot)');
+      return false;
+    } else if (emailInput.indexOf(".") === emailInput.length - 1) {
+      setError("Email can not end with '.'");
+      return false;
+    } else if (emailInput.length < 3) {
+      setError("Email is too short.");
+      return false;
+    } else if (passwordInput.length < 5) {
+      setError("Password has to be at least 5 characters long.");
+      return false;
+    } else if (emailInput.length < 6) {
+      setError("email has to be at least 6 characters long.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const formSubmitHandler = async (event) => {
     event.preventDefault();
     const emailInput = emailInputRef.current.value;
     const passwordInput = passwordInputRef.current.value;
 
-    if (
-      !emailInput.includes("@") ||
-      emailInput.indexOf("@") === 0 ||
-      !emailInput.includes(".") ||
-      emailInput.indexOf(".") === emailInput.length - 1 ||
-      emailInput.length < 3 ||
-      passwordInput.length < 5
-    ) {
-      setError("Incorrect email, or password");
-      return;
-    }
+    if (!checkValidity(emailInput, passwordInput)) return;
 
     const inputData = {
       email: emailInput,
@@ -37,42 +54,24 @@ const LoginForm = (props) => {
       returnSecureToken: true,
     };
 
-    if (props.type === "createAccount") {
+    if (typeOfComponent === "createAccount") {
       const confirmPassword = confirmPasswordInputRef.current.value;
 
       if (passwordInput !== confirmPassword) {
-        setError("Provided passwords are not the same"); // do poprawy!
+        setError("Entered passwords are different.");
         return;
       }
     }
+    try {
+      if (typeOfComponent === "login") await authCtx.login(inputData);
+      if (typeOfComponent === "createAccount")
+        await authCtx.createAccount(inputData);
+    } catch (err) {
+      setError(err.message);
+      return;
+    }
 
-    let url = "";
-    props.type === "login"
-      ? (url =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDt96ic9vIPskghHCG03yyOX9j-FBdB3VY")
-      : (url =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDt96ic9vIPskghHCG03yyOX9j-FBdB3VY");
-
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify(inputData),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          setError("Something went wrong. Check your email and password, then click submit.");
-        } else {
-          return response.json();
-        }
-      })
-      .then((responseData) => {
-        authCtx.login(responseData.idToken, responseData.localId);
-        console.log(responseData);
-        history.replace("/home");
-      })
-      .catch((message) => {
-        console.log(message)
-      });
+    history.replace("/home");
   };
 
   return (
@@ -100,8 +99,7 @@ const LoginForm = (props) => {
           </Link>
         )}
         <div className={classes.submitButton}>
-          
-        {error && <p className={classes.errorParagraph}>{error}</p>}
+          {error && <p className={classes.errorParagraph}>{error}</p>}
           <button onClick={formSubmitHandler}>
             {props.type === "login" ? "Submit" : "Create Account"}
           </button>

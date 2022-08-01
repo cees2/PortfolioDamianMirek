@@ -1,0 +1,57 @@
+.sortWrapper {
+  width: 50%;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.sortLabel {
+  padding-right: 2rem;
+  font-size: 1.4rem;
+  color: white;
+}
+
+.selectSort {
+  border: none;
+  font-size: 1rem;
+  padding: 4px 20px;
+  border-radius: 6px;
+  background-color: #026873;
+  color: white;
+}
+
+.order {
+  background-color: transparent;
+  border: none;
+}
+
+.order:hover {
+  cursor: pointer;
+  transform: scale(105%);
+  transition: all 0.4s linear;
+}
+
+.sortArrow {
+  transition: all 0.15s linear;
+  width: 40%;
+  height: 40%;
+}
+
+.rotateArrow {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+  .sortWrapper {
+    width: 95%;
+  }
+
+  .sortLabel {
+    padding-right: 1rem;
+  }
+
+  .selectSort {
+    margin-right: 1rem;
+  }
+}

@@ -97,3 +97,13 @@
     flex-basis: 80%;
   }
 }
+
+@media (min-width: 769px) and (max-width: 1112px) {
+  .deleteTaskButton {
+    width: 50%;
+  }
+
+  .deleteTaskButton p {
+    flex-basis: 80%;
+  }
+}

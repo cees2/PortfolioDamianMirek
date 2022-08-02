@@ -38,7 +38,7 @@
   max-width: 3rem;
 }
 
-@media (max-width: 768px), (orientation: landscape) {
+@media ((max-width: 768px) and (orientation: landscape)), (max-width: 768px) {
   .homePageWrapper {
     display: flex;
     flex-direction: column;

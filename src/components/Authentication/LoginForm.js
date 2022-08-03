@@ -30,10 +30,10 @@ const LoginForm = (props) => {
     } else if (emailInput.length < 3) {
       setError("Email is too short.");
       return false;
-    } else if (passwordInput.length < 5) {
+    } else if (passwordInput.trim().length < 5) {
       setError("Password has to be at least 5 characters long.");
       return false;
-    } else if (emailInput.length < 6) {
+    } else if (emailInput.trim().length < 6) {
       setError("email has to be at least 6 characters long.");
       return false;
     }

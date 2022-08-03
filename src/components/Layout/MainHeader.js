@@ -6,7 +6,8 @@ import AuthContext from "../../store/auth-context";
 import { useMediaQuery } from "react-responsive";
 
 const MainHeader = () => {
-  const [isHamburgerActive, setIsHamburgerActive] = useState(0);
+  const [isHamburgerActive, setIsHamburgerActive] = useState(0); // 0--> hidden, 1--> active
+  const [moveMobileMenu, setMoveMobileMenu] = useState(false);
   const taskCtx = useContext(TaskContext);
   const authCtx = useContext(AuthContext);
   const numberOfTasks = taskCtx.tasks.length;
@@ -21,13 +22,22 @@ const MainHeader = () => {
     return wider ? children : null;
   };
 
-  const hamburgerMenuClickHandler = () => {
-    setIsHamburgerActive((prevState) => ++prevState % 2);
+  const hamburgerMenuClickHandler = ({ target: { alt } }) => {
+    if (alt === "close menu") setIsHamburgerActive(0);
+    if (alt === "hamburger menu") setIsHamburgerActive(1);
+    setMoveMobileMenu(true);
   };
 
-  const hamburgerMenuClasses = `${classes.mobileMainMenu} ${
-    isHamburgerActive ? classes.hamburgerActive : classes.hamburgerDeactivate
-  }`;
+  console.log(isHamburgerActive, moveMobileMenu);
+
+  const getClasses = function () {
+    if (!isHamburgerActive && moveMobileMenu)
+      return classes.hamburgerDeactivated;
+    if (isHamburgerActive && moveMobileMenu) return classes.hamburgerActive;
+    else return "";
+  };
+
+  const hamburgerMenuClasses = `${classes.mobileMainMenu} ${getClasses()}`;
 
   const menuList = (
     <ul className={classes.headerList} onClick={hamburgerMenuClickHandler}>

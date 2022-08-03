@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --headerHeight: 10vh;
+}
+
 body {
   background-color: #3b8c66;
   font-family: "Dosis", sans-serif;

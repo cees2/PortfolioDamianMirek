@@ -1,7 +1,14 @@
-.homePageWrapper {
+.homePageContentWrapper {
   display: flex;
   width: 95%;
   margin: 5rem auto 0;
+}
+
+.homePageWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - var(--headerHeight));
 }
 
 .homeSection {
@@ -38,8 +45,8 @@
   max-width: 3rem;
 }
 
-@media ((max-width: 768px) and (orientation: landscape)), (max-width: 768px) {
-  .homePageWrapper {
+@media ((max-width: 1024px) and (orientation: landscape)), (max-width: 1024px) {
+  .homePageContentWrapper {
     display: flex;
     flex-direction: column;
     margin: 0;

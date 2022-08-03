@@ -6,8 +6,8 @@ import React from "react";
 
 const Home = () => {
   return (
-    <React.Fragment>
-      <div className={classes.homePageWrapper}>
+    <div className={classes.homePageWrapper}>
+      <div className={classes.homePageContentWrapper}>
         <section className={classes.homeSection}>
           <img src={pic} alt="Programmer" />
         </section>
@@ -36,7 +36,7 @@ const Home = () => {
           <img src={linkedInIcon} alt="linkedin icon" />
         </a>
       </footer>
-    </React.Fragment>
+    </div>
   );
 };
 

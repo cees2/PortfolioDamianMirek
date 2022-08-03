@@ -1,6 +1,5 @@
 .mainContent {
   width: 100%;
-}
-
-@media (max-width: 768px) {
+  min-height: calc(100vh - var(--headerHeight));
+  /* display: flex; */
 }

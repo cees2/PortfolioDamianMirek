@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d29fbeb8.css",
+    "main.js": "/static/js/main.d69668cc.js",
+    "static/media/clip-programming.png": "/static/media/clip-programming.ba704ff77e39094aa378.png",
+    "static/media/github.png": "/static/media/github.db032c97d1a71b9d1437.png",
+    "index.html": "/index.html",
+    "main.d29fbeb8.css.map": "/static/css/main.d29fbeb8.css.map",
+    "main.d69668cc.js.map": "/static/js/main.d69668cc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d29fbeb8.css",
+    "static/js/main.d69668cc.js"
+  ]
+}

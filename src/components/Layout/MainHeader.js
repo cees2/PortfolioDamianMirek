@@ -22,19 +22,26 @@ const MainHeader = () => {
     return wider ? children : null;
   };
 
-  const hamburgerMenuClickHandler = ({ target: { alt } }) => {
-    if (alt === "close menu") setIsHamburgerActive(0);
-    if (alt === "hamburger menu") setIsHamburgerActive(1);
-    setMoveMobileMenu(true);
-  };
-
   console.log(isHamburgerActive, moveMobileMenu);
+
+  const hamburgerMenuClickHandler = ({ target }) => {
+    setMoveMobileMenu(true);
+    if (target.alt === "close menu") setIsHamburgerActive(0);
+    else if (target.alt === "hamburger menu") setIsHamburgerActive(1);
+    else {
+      console.log("kk");
+      setMoveMobileMenu(false);
+      setIsHamburgerActive(0);
+    }
+  };
 
   const getClasses = function () {
     if (!isHamburgerActive && moveMobileMenu)
       return classes.hamburgerDeactivated;
-    if (isHamburgerActive && moveMobileMenu) return classes.hamburgerActive;
-    else return "";
+    else if (isHamburgerActive && moveMobileMenu)
+      return classes.hamburgerActive;
+
+    return "";
   };
 
   const hamburgerMenuClasses = `${classes.mobileMainMenu} ${getClasses()}`;

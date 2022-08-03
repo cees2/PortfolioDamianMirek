@@ -22,14 +22,11 @@ const MainHeader = () => {
     return wider ? children : null;
   };
 
-  console.log(isHamburgerActive, moveMobileMenu);
-
   const hamburgerMenuClickHandler = ({ target }) => {
     setMoveMobileMenu(true);
     if (target.alt === "close menu") setIsHamburgerActive(0);
     else if (target.alt === "hamburger menu") setIsHamburgerActive(1);
     else {
-      console.log("kk");
       setMoveMobileMenu(false);
       setIsHamburgerActive(0);
     }

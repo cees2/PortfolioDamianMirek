@@ -41,7 +41,6 @@ const SortTasks = (props) => {
   };
 
   const sortHandler = () => {
-    console.log(sortRef.current.value);
     const sortDecision = sortRef.current.value;
     if (!sortDecision) {
       setButtonDisabled(true);

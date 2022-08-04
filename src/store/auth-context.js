@@ -34,16 +34,16 @@ export const AuthContextProvider = (props) => {
 
   const login = async (inputData) => {
     try {
-      const data = await accountAJAXManager(inputData); // do poprawy message
+      const data = await accountAJAXManager(inputData);
       manageLocalStorage(data);
     } catch (err) {
-      throw err; // do poprawy
+      throw err;
     }
   };
 
   const createAccount = async (inputData) => {
     try {
-      const data = await accountAJAXManager(inputData, false); // do poprawy message
+      const data = await accountAJAXManager(inputData, false);
 
       manageLocalStorage(data);
     } catch (err) {

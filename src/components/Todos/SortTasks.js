@@ -2,16 +2,14 @@ import React, { useRef, useContext, useState } from "react";
 import classes from "./SortTasks.module.css";
 import TaskContext from "../../store/tasks-context";
 
-// //////////////////////// RACZEJ DO POPRAWY(STRZALKA) ///////////////////////////////////////////
-
 const SortTasks = (props) => {
-  const [arrowPosition, setArrowPosition] = useState(0); // 0 and 1
+  const [arrowPosition, setArrowPosition] = useState(0); // 0 --> up, 1 --> down
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const sortRef = useRef();
   const taskCtx = useContext(TaskContext);
   const tasks = taskCtx.tasks;
 
-  const sortAlphabet = () => {
+  const sortByAlphabet = () => {
     const tasksName = tasks.map((task) => task.task).sort();
 
     if (!arrowPosition) tasksName.reverse();
@@ -21,7 +19,7 @@ const SortTasks = (props) => {
       return tasks.filter((task) => task.task === curTask);
     });
   };
-  const sortDate = () =>
+  const sortByDate = () =>
     taskCtx.tasks
       .map((task) => new Date(task.date).getTime())
       .sort((a, b) => {
@@ -31,7 +29,7 @@ const SortTasks = (props) => {
         tasks.filter((task) => new Date(task.date).getTime() === date)
       );
 
-  const sortPriority = () => {
+  const sortByPriority = () => {
     const highPriorityTask = tasks.filter((task) => task.priority === "High");
     const mediumPriorityTask = tasks.filter(
       (task) => task.priority === "Medium"
@@ -43,6 +41,7 @@ const SortTasks = (props) => {
   };
 
   const sortHandler = () => {
+    console.log(sortRef.current.value);
     const sortDecision = sortRef.current.value;
     if (!sortDecision) {
       setButtonDisabled(true);
@@ -51,11 +50,11 @@ const SortTasks = (props) => {
     setArrowPosition((prevPos) => ++prevPos % 2);
     setButtonDisabled(false);
     if (sortDecision === "alphabet") {
-      props.onTasksSorted(sortAlphabet());
+      props.onTasksSorted(sortByAlphabet());
     } else if (sortDecision === "priority") {
-      props.onTasksSorted(sortPriority());
+      props.onTasksSorted(sortByPriority());
     } else if (sortDecision === "date") {
-      props.onTasksSorted(sortDate());
+      props.onTasksSorted(sortByDate());
     }
   };
 

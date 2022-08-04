@@ -33,7 +33,7 @@ function App() {
     };
 
     fetchData();
-  }, [authCtx.userLocalId]); // do poprawy
+  }, [authCtx.userLocalId]); // this useEffect will be called only when user logs in.
 
   return (
     <Layout>
@@ -54,12 +54,16 @@ function App() {
             <TasksToDo />
           </Route>
         )}
-        <Route path="/Login">
-          <Login />
-        </Route>
-        <Route path="/CreateAccount">
-          <CreateAccount />
-        </Route>
+        {!authCtx.token && (
+          <Route path="/Login">
+            <Login />
+          </Route>
+        )}
+        {!authCtx.token && (
+          <Route path="/CreateAccount">
+            <CreateAccount />
+          </Route>
+        )}
       </Switch>
     </Layout>
   );

@@ -19,6 +19,9 @@ export const accountAJAXManager = async (inputData, login = true) => {
         throw new Error("Incorrect password, try again.");
       } else if (message.startsWith("TOO_MANY_ATTEMPTS_TRY_LATER"))
         throw new Error("Too many attemps. Try again later.");
+      else if (message === "EMAIL_EXISTS")
+        throw new Error("Provided email already exists.");
+      else throw new Error("Something went wrong");
     }
 
     return {
@@ -26,6 +29,6 @@ export const accountAJAXManager = async (inputData, login = true) => {
       userId: data.localId,
     };
   } catch (err) {
-    throw err; // do poprawy
+    throw err;
   }
 };

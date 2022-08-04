@@ -43,8 +43,8 @@ form.loginInput {
 .submitButton button {
   font-size: 16px;
   border-radius: 6px;
-  width: 62%;
-  padding: 10px 20px;
+  width: 60%;
+  padding: 10px 0;
   background-color: #a3ab78;
   border: none;
 }

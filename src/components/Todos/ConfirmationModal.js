@@ -13,7 +13,10 @@ const ConfirmationModal = (props) => {
   return (
     <React.Fragment>
       <Backdrop onReject={props.onReject} />
-      <div className={classes.modalWrapper}>
+      <div
+        className={classes.modalWrapper}
+        style={{ top: `calc(50% + ${window.scrollY}px)` }}
+      >
         <h3 className={classes.modalQuestion}>
           Are you sure you want to delete this task?
         </h3>

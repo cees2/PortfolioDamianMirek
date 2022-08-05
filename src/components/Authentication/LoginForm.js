@@ -4,6 +4,7 @@ import AuthContext from "../../store/auth-context";
 import { useContext, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Card from "../UI/Card";
+import { Fragment } from "react";
 
 const LoginForm = (props) => {
   const [error, setError] = useState(false);
@@ -34,7 +35,7 @@ const LoginForm = (props) => {
       setError("Password has to be at least 6 characters long.");
       return false;
     } else if (emailInput.trim().length < 6) {
-      setError("email has to be at least 6 characters long.");
+      setError("Email has to be at least 6 characters long.");
       return false;
     }
 
@@ -99,7 +100,17 @@ const LoginForm = (props) => {
           </Link>
         )}
         <div className={classes.submitButton}>
-          {error && <p className={classes.errorParagraph}>{error}</p>}
+          {error && (
+            <div className={classes.errorWrapper}>
+              <img
+                src={require("../../pictures/error.png")}
+                alt="Error icon"
+                className={classes.errorIcon}
+              />
+              <p className={classes.errorParagraph}>{error}</p>
+            </div>
+          )}
+
           <button onClick={formSubmitHandler}>
             {props.type === "login" ? "Submit" : "Create Account"}
           </button>

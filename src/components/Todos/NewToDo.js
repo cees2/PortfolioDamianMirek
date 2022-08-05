@@ -1,12 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
 import classes from "./NewToDo.module.css";
 import { useRef, useState } from "react";
 import { useContext } from "react";
 import TaskContext from "./../../store/tasks-context";
 import AuthContext from "../../store/auth-context";
+import { Link } from "react-router-dom";
 
 const NewToDo = () => {
   const [error, setError] = useState(null);
+  const [taskAdded, setTaskAdded] = useState(false);
   const taskRef = useRef();
   const priorityRef = useRef();
   const taskCtx = useContext(TaskContext);
@@ -26,6 +28,7 @@ const NewToDo = () => {
       setError("You can't add empty task.");
       return;
     } else {
+      setTaskAdded(true);
       setError(false);
       const dataToBeSent = {
         id: Math.random(),
@@ -35,30 +38,59 @@ const NewToDo = () => {
           taskRef.current.value.slice(1),
         priority: priorityRef.current.value,
         date: new Date(),
-        //or navigator.language
       };
       taskCtx.addTask(dataToBeSent);
       taskRef.current.value = "";
+      setTimeout(() => setTaskAdded(false), 6000);
     }
   };
 
+  const bannerClasses = `${classes.taskAddedBanner} ${
+    taskAdded && !error ? classes.activeBanner : ""
+  }`;
   return (
-    <form onSubmit={formSubmitHandler} className={classes.taskInput}>
-      <div className={classes.taskToDo}>
-        <label htmlFor="task">Task</label>
-        <input type="text" id="task" ref={taskRef} />
-        {error && <p className={classes.errorInformation}>{error}</p>}
-      </div>
-      <div className={classes.option}>
-        <label htmlFor="option">Priority</label>
-        <select className={classes.optionInput} ref={priorityRef}>
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select>
-      </div>
-      <button className={classes.submitButton}>Add task</button>
-    </form>
+    <Fragment>
+      {taskAdded && (
+        <div className={bannerClasses}>
+          <img
+            src={require("../../pictures/task_added.png")}
+            alt="Success icon"
+          />
+          <p className={classes.taskAdded}>
+            Task has been successfully added.
+            <br />
+            <Link to="/toDoApp" className={classes.seeTasksLink}>
+              See my tasks.
+            </Link>
+          </p>
+        </div>
+      )}
+      <form onSubmit={formSubmitHandler} className={classes.taskInput}>
+        <div className={classes.taskToDo}>
+          <label htmlFor="task">Task</label>
+          <input type="text" id="task" ref={taskRef} />
+          {error && (
+            <div className={classes.errorWrapper}>
+              <img
+                src={require("../../pictures/error.png")}
+                alt="Error icon"
+                className={classes.errorIcon}
+              />
+              <p className={classes.errorInformation}>{error}</p>
+            </div>
+          )}
+        </div>
+        <div className={classes.option}>
+          <label htmlFor="option">Priority</label>
+          <select className={classes.optionInput} ref={priorityRef}>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+        <button className={classes.submitButton}>Add task</button>
+      </form>
+    </Fragment>
   );
 };
 

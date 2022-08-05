@@ -1,7 +1,6 @@
 import { createContext, useState } from "react";
 
 const TaskContext = createContext({
-  //{id: 1, task: 'sss', priority: 'Low', userId: '0.98312321', addDate: 01.02.2021}
   tasks: [],
   setTasks: (tasks) => {},
   addTask: (task) => {},

@@ -13,10 +13,12 @@ export const accountAJAXManager = async (inputData, login = true) => {
       const {
         error: { message },
       } = data;
-      if (message === "EMAIL_NOT_FOUND" || message === "INVALID_EMAIL") {
-        throw new Error("Incorrect email, try again.");
-      } else if (message === "INVALID_PASSWORD") {
-        throw new Error("Incorrect password, try again.");
+      if (
+        message === "EMAIL_NOT_FOUND" ||
+        message === "INVALID_EMAIL" ||
+        message === "INVALID_PASSWORD"
+      ) {
+        throw new Error("Invalid email or password.");
       } else if (message.startsWith("TOO_MANY_ATTEMPTS_TRY_LATER"))
         throw new Error("Too many attemps. Try again later.");
       else if (message === "EMAIL_EXISTS")

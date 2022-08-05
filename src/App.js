@@ -8,10 +8,12 @@ import TaskContext from "./store/tasks-context";
 import Login from "./pages/Login";
 import CreateAccount from "./pages/CreateAccount";
 import AuthContext from "./store/auth-context";
+import JSQuiz from "./pages/JSQuiz";
 
 function App() {
   const taskCtx = useContext(TaskContext);
   const authCtx = useContext(AuthContext);
+  const token = authCtx.token;
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -44,22 +46,27 @@ function App() {
         <Route path="/home">
           <HomePage />
         </Route>
-        {authCtx.token && (
+        {token && (
+          <Route path="/JSQuiz">
+            <JSQuiz />
+          </Route>
+        )}
+        {token && (
           <Route path="/newToDo">
             <AddToDo />
           </Route>
         )}
-        {authCtx.token && (
+        {token && (
           <Route path="/toDoApp">
             <TasksToDo />
           </Route>
         )}
-        {!authCtx.token && (
+        {!token && (
           <Route path="/Login">
             <Login />
           </Route>
         )}
-        {!authCtx.token && (
+        {!token && (
           <Route path="/CreateAccount">
             <CreateAccount />
           </Route>

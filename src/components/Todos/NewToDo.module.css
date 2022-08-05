@@ -53,9 +53,52 @@
 }
 
 .errorInformation {
-  color: white;
-  font-size: 21px;
   margin: 4px 0;
+  color: rgb(246, 57, 57);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.errorWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorIcon {
+  width: 25px;
+}
+
+.taskAddedBanner {
+  background-color: #287b54;
+  width: 35%;
+  position: absolute;
+  top: 15vh;
+  left: 50%;
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem 0;
+  font-weight: 700;
+  border-radius: 8px;
+  transform: scale(0) translateX(-50%);
+  text-align: center;
+}
+
+.seeTasksLink {
+  color: #fff;
+  font-size: 15px;
+  border-bottom: 1px solid white;
+  margin-right: 5px;
+}
+
+.activeBanner {
+  animation: showBanner 0.3s both;
+}
+
+@keyframes showBanner {
+  100% {
+    transform: scale(100%) translateX(-50%);
+  }
 }
 
 @media (max-width: 768px) {
@@ -65,5 +108,15 @@
 
   .submitButton {
     width: 85%;
+  }
+
+  .taskAddedBanner {
+    width: 95%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1040px) {
+  .taskAddedBanner {
+    width: 55%;
   }
 }

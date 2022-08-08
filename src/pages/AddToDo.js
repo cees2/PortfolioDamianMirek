@@ -1,7 +1,5 @@
-import NewToDo from "../components/Todos/NewToDo"
+import NewToDo from "../components/Todos/NewToDo";
 
-const AddToDo = () => {
-    return <NewToDo/>
-}
+const AddToDo = () => <NewToDo />;
 
-export default AddToDo
+export default AddToDo;

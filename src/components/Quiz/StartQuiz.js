@@ -1,15 +1,54 @@
-import React, { Fragment, useState } from "react";
+import React, {
+  Fragment,
+  useEffect,
+  useState,
+  useContext,
+  useReducer,
+} from "react";
 import classes from "./StartQuiz.module.css";
+import QuizContext from "../../store/quiz-context";
 import QuizContent from "./QuizContent";
 
-const StartQuiz = () => {
-  const [quizStarted, setQuizStarted] = useState(false);
+const questionIndexManager = (state, action) => {
+  switch (action.type) {
+    case "INCREMENT":
+      if (state === 9) return state;
+      return ++state;
+    case "DECREMENT":
+      if (state === 0) return state;
+      return --state;
+    case "SETINDEX":
+      return action.payload;
+    default:
+      return state;
+  }
+};
 
-  const startQuizHandler = () => {
-    setQuizStarted(true);
+const StartQuiz = () => {
+  const quizCtx = useContext(QuizContext);
+  const [indexOfQuestion, indexDispatch] = useReducer(questionIndexManager, 0);
+  const [quizIsActive, setQuizIsActive] = useState(false);
+
+  useEffect(() => {
+    const getData = async function () {
+      const response = await fetch(
+        "https://opentdb.com/api.php?amount=10&category=18&difficulty=hard"
+      );
+      const data = await response.json();
+      quizCtx.setAllQuestions(data);
+    };
+    getData();
+    indexDispatch({ type: "SETINDEX", payload: 0 });
+  }, []);
+
+  const showQuizHandler = () => setQuizIsActive(true);
+
+  const switchQuestion = (nextQuestion = true) => {
+    if (nextQuestion) indexDispatch({ type: "INCREMENT" });
+    else indexDispatch({ type: "DECREMENT" });
   };
 
-  return (
+  const startPage = (
     <Fragment>
       <h1 className={classes.quizHeader}>JavaScript Quiz</h1>
       <div className={classes.quizMainWrapper}>
@@ -21,19 +60,27 @@ const StartQuiz = () => {
           <p className={classes.quizDescription}>
             According to stack overflow JavaScript is the most commonly-used
             programming language in the whole world (69.7%). Its deep
-            understanding of highly valuable nowadays. Take the following quiz
+            understanding is highly valuable nowadays. Take the following quiz
             and check your knowledge.
           </p>
-          <button
-            className={classes.startQuizButton}
-            onClick={startQuizHandler}
-          >
+          <button className={classes.startQuizButton} onClick={showQuizHandler}>
             Take quiz
           </button>
         </div>
       </div>
-      {quizStarted && <QuizContent />}
     </Fragment>
+  );
+
+  return (
+    <>
+      {!quizIsActive && startPage}
+      {quizIsActive && (
+        <QuizContent
+          question={quizCtx.questions.results[indexOfQuestion]}
+          onSwitchQuestion={switchQuestion}
+        />
+      )}
+    </>
   );
 };
 

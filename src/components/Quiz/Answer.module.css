@@ -1,0 +1,12 @@
+.singleAnswer {
+  border-bottom: 1px solid white;
+}
+
+.singleAnswer:last-child {
+  border: none;
+}
+
+.singleAnswer input,
+.singleAnswer label {
+  margin: 0 0 1rem 2rem;
+}

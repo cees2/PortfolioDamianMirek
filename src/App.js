@@ -8,7 +8,7 @@ import TaskContext from "./store/tasks-context";
 import Login from "./pages/Login";
 import CreateAccount from "./pages/CreateAccount";
 import AuthContext from "./store/auth-context";
-import JSQuiz from "./pages/JSQuiz";
+import JSQuizStartPage from "./pages/JSQuizStartPage";
 
 function App() {
   const taskCtx = useContext(TaskContext);
@@ -47,11 +47,6 @@ function App() {
           <HomePage />
         </Route>
         {token && (
-          <Route path="/JSQuiz">
-            <JSQuiz />
-          </Route>
-        )}
-        {token && (
           <Route path="/newToDo">
             <AddToDo />
           </Route>
@@ -69,6 +64,11 @@ function App() {
         {!token && (
           <Route path="/CreateAccount">
             <CreateAccount />
+          </Route>
+        )}
+        {token && (
+          <Route path="/JSQuizStartPage">
+            <JSQuizStartPage />
           </Route>
         )}
       </Switch>

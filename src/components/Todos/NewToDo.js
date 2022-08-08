@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 const NewToDo = () => {
   const [error, setError] = useState(null);
   const [taskAdded, setTaskAdded] = useState(false);
+  const [bannerTimeout, setBannerTimeout] = useState(null);
   const taskRef = useRef();
   const priorityRef = useRef();
   const taskCtx = useContext(TaskContext);
@@ -41,7 +42,8 @@ const NewToDo = () => {
       };
       taskCtx.addTask(dataToBeSent);
       taskRef.current.value = "";
-      setTimeout(() => setTaskAdded(false), 6000);
+      if (bannerTimeout) clearTimeout(bannerTimeout);
+      setBannerTimeout(setTimeout(() => setTaskAdded(false), 6000));
     }
   };
 

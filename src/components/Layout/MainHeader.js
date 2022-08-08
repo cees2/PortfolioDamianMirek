@@ -47,7 +47,7 @@ const MainHeader = () => {
     <ul className={classes.headerList} onClick={hamburgerMenuClickHandler}>
       {authCtx.token && (
         <li>
-          <NavLink activeClassName={classes.active} to="/JSQuiz">
+          <NavLink activeClassName={classes.active} to="/JSQuizStartPage">
             <img
               src={require(`../../pictures/quiz_icon.png`)}
               alt="take a quiz"

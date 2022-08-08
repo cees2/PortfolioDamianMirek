@@ -4,7 +4,6 @@ import AuthContext from "../../store/auth-context";
 import { useContext, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Card from "../UI/Card";
-import { Fragment } from "react";
 
 const LoginForm = (props) => {
   const [error, setError] = useState(false);

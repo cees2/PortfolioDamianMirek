@@ -1,32 +1,11 @@
-import React, {
-  Fragment,
-  useEffect,
-  useState,
-  useContext,
-  useReducer,
-} from "react";
+import React, { Fragment, useEffect, useState, useContext } from "react";
 import classes from "./StartQuiz.module.css";
 import QuizContext from "../../store/quiz-context";
 import QuizContent from "./QuizContent";
-
-const questionIndexManager = (state, action) => {
-  switch (action.type) {
-    case "INCREMENT":
-      if (state === 9) return state;
-      return ++state;
-    case "DECREMENT":
-      if (state === 0) return state;
-      return --state;
-    case "SETINDEX":
-      return action.payload;
-    default:
-      return state;
-  }
-};
+import QuizNavigation from "./Quiz-Navigation/QuizNavigation";
 
 const StartQuiz = () => {
   const quizCtx = useContext(QuizContext);
-  const [indexOfQuestion, indexDispatch] = useReducer(questionIndexManager, 0);
   const [quizIsActive, setQuizIsActive] = useState(false);
 
   useEffect(() => {
@@ -38,30 +17,31 @@ const StartQuiz = () => {
       quizCtx.setAllQuestions(data);
     };
     getData();
-    indexDispatch({ type: "SETINDEX", payload: 0 });
+    quizCtx.indexDispatch({ type: "SETINDEX", payload: 0 });
   }, []);
 
   const showQuizHandler = () => setQuizIsActive(true);
 
   const switchQuestion = (nextQuestion = true) => {
-    if (nextQuestion) indexDispatch({ type: "INCREMENT" });
-    else indexDispatch({ type: "DECREMENT" });
+    if (nextQuestion) quizCtx.indexDispatch({ type: "INCREMENT" });
+    else quizCtx.indexDispatch({ type: "DECREMENT" });
   };
 
   const startPage = (
     <Fragment>
-      <h1 className={classes.quizHeader}>JavaScript Quiz</h1>
+      <h1 className={classes.quizHeader}>Computer Science Quiz</h1>
       <div className={classes.quizMainWrapper}>
         <img
-          src={require(`../../pictures/javascript_logo.png`)}
-          alt="javascript logo"
+          src={require(`../../pictures/computer_science_icon.png`)}
+          alt="computer science logo"
         />
         <div className={classes.quizImageAndDescription}>
           <p className={classes.quizDescription}>
-            According to stack overflow JavaScript is the most commonly-used
-            programming language in the whole world (69.7%). Its deep
-            understanding is highly valuable nowadays. Take the following quiz
-            and check your knowledge.
+            Computer science is a fast-developing branch of industry. Without
+            this kind of technology our world would be a totally different
+            place. It makes our lives simpler and better. Deep undestanding of
+            just a branch of computer science is highly valuable nowadays. Check
+            out your knowledge with the following quiz.
           </p>
           <button className={classes.startQuizButton} onClick={showQuizHandler}>
             Take quiz
@@ -71,16 +51,23 @@ const StartQuiz = () => {
     </Fragment>
   );
 
-  return (
-    <>
-      {!quizIsActive && startPage}
-      {quizIsActive && (
+  const quizContent = (
+    <div className={classes.quizQuestionsWrapper}>
+      <QuizNavigation />
+      {quizCtx.questions?.length && (
         <QuizContent
-          question={quizCtx.questions.results[indexOfQuestion]}
+          question={quizCtx.questions[quizCtx.indexOfQuestion]}
           onSwitchQuestion={switchQuestion}
         />
       )}
-    </>
+    </div>
+  );
+
+  return (
+    <Fragment>
+      {!quizIsActive && startPage}
+      {quizIsActive && quizContent}
+    </Fragment>
   );
 };
 

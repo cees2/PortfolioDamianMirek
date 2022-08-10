@@ -1,0 +1,20 @@
+.quizNavigationItem {
+  flex-grow: 1;
+  text-align: center;
+  margin-right: 4px;
+  border: 1px solid white;
+  border-radius: 6px;
+}
+
+.quizNavigationItem:hover {
+  cursor: pointer;
+  background-color: #2d7252;
+}
+
+.questionAnswered {
+  background-color: #8ecaad;
+}
+
+.activeNaviItem {
+  background-color: rgb(8, 65, 44);
+}

@@ -1,0 +1,7 @@
+.questionsNavigation {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  list-style-type: none;
+  color: white;
+}

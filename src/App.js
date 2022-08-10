@@ -9,11 +9,15 @@ import Login from "./pages/Login";
 import CreateAccount from "./pages/CreateAccount";
 import AuthContext from "./store/auth-context";
 import JSQuizStartPage from "./pages/JSQuizStartPage";
+import QuizContext from "./store/quiz-context";
+import QuizResultPage from "./pages/QuizResultPage";
 
 function App() {
   const taskCtx = useContext(TaskContext);
   const authCtx = useContext(AuthContext);
-  const token = authCtx.token;
+  const quizCtx = useContext(QuizContext);
+  const { token } = authCtx;
+  const { quizFinished } = quizCtx;
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -62,13 +66,18 @@ function App() {
           </Route>
         )}
         {!token && (
-          <Route path="/CreateAccount">
+          <Route path="/createAccount">
             <CreateAccount />
           </Route>
         )}
         {token && (
           <Route path="/JSQuizStartPage">
             <JSQuizStartPage />
+          </Route>
+        )}
+        {token && ( // do poprawy, cos innego zamiast token.
+          <Route path="/quizResult">
+            <QuizResultPage />
           </Route>
         )}
       </Switch>

@@ -1,12 +1,12 @@
 .quizContentWrapper {
   color: white;
   background-color: #025939;
-  position: absolute;
+  /* position: absolute; */
   width: 70%;
   min-height: 50vh;
-  top: 50%;
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -30,11 +30,16 @@
   border: none;
   background-color: #93d94e;
   margin: 1rem 0;
+  opacity: 1;
 }
 
 .navigationButtons button:hover {
   cursor: pointer;
   background-color: #72c81c;
+}
+
+.hideNaviButton {
+  visibility: hidden;
 }
 
 .singleQuestionForm {
@@ -48,4 +53,34 @@
 .quizQuestion {
   padding: 1rem 0;
   font-size: 20px;
+}
+
+.quizErrorMessage {
+  text-align: center;
+}
+
+.errorBanner {
+  width: 30%;
+  height: 3rem;
+  background-color: #fff;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: red;
+  opacity: 0;
+}
+
+.activeErrorBanner {
+  animation: showErrorBanner 0.3s ease both;
+}
+
+@keyframes showErrorBanner {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

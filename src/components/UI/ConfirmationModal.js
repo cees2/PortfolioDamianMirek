@@ -17,9 +17,7 @@ const ConfirmationModal = (props) => {
         className={classes.modalWrapper}
         style={{ top: `calc(50% + ${window.scrollY}px)` }}
       >
-        <h3 className={classes.modalQuestion}>
-          Are you sure you want to delete this task?
-        </h3>
+        <h3 className={classes.modalQuestion}>{props.message}</h3>
         <div className={classes.modalButtons}>
           <button
             className={classes.acceptDeleteButton}
@@ -31,7 +29,7 @@ const ConfirmationModal = (props) => {
             className={classes.rejectDeleteButton}
             onClick={props.onReject}
           >
-            No{" "}
+            No
           </button>
         </div>
       </div>

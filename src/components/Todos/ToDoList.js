@@ -4,7 +4,7 @@ import classes from "./ToDoList.module.css";
 import SingleToDo from "./SingleToDo";
 import TaskContext from "../../store/tasks-context";
 import SortTasks from "./SortTasks";
-import ConfirmationModal from "./ConfirmationModal";
+import ConfirmationModal from "./../UI/ConfirmationModal";
 
 const ToDoList = () => {
   const [modalIsClosed, setModalIsClosed] = useState(true);
@@ -67,8 +67,9 @@ const ToDoList = () => {
           <ConfirmationModal
             onConfirm={deleteTaskHandler}
             onReject={hideModal}
+            message="Are you sure you want to delete this task?"
           />,
-          document.getElementById("delete-task-confirmation-modal")
+          document.getElementById("confirmation-modal")
         )}
       {taskCtx.tasks.length && <SortTasks onTasksSorted={sortTasks} />}
       <div className={classes.listWrapper}>

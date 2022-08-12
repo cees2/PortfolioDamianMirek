@@ -1,4 +1,5 @@
 import { createContext, useState, useReducer } from "react";
+import { questionIndexManager, getQuizResult } from "./quiz-context-helpers";
 
 const QuizContext = createContext({
   questions: [],
@@ -10,21 +11,6 @@ const QuizContext = createContext({
   getQuestion: (questionId) => {},
   setAllQuestions: (questions) => {},
 });
-
-const questionIndexManager = (state, action) => {
-  switch (action.type) {
-    case "INCREMENT":
-      if (state === 9) return state;
-      return ++state;
-    case "DECREMENT":
-      if (state === 0) return state;
-      return --state;
-    case "SETINDEX":
-      return action.payload;
-    default:
-      return state;
-  }
-};
 
 export const QuizContextProvider = (props) => {
   const [questions, setQuestions] = useState([]);
@@ -50,20 +36,33 @@ export const QuizContextProvider = (props) => {
   const setAllQuestions = (questions) => {
     setQuestions((prevQuestions) => questions.results);
     questions.results.forEach((result, i) =>
-      setCorrectAnswers(
-        correctAnswers.push({ id: i, answer: result.correct_answer })
-      )
+      setCorrectAnswers((prevCorrectAnswers) => [
+        ...prevCorrectAnswers,
+        { id: i, answer: result.correct_answer },
+      ])
     );
+  };
+
+  const getResult = () => getQuizResult(correctAnswers, answers);
+
+  const resetQuizData = () => {
+    setQuestions([]);
+    indexDispatch({ type: "SETINDEX", payload: 0 });
+    setAnswers([]);
+    setCorrectAnswers([]);
   };
 
   const quizContext = {
     questions,
     indexOfQuestion,
     answers,
+    correctAnswers,
+    getResult,
     setAnswer,
     indexDispatch,
     getQuestion,
     setAllQuestions,
+    resetQuizData,
   };
 
   return (

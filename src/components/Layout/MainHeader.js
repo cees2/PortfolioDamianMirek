@@ -52,7 +52,7 @@ const MainHeader = () => {
               src={require(`../../pictures/quiz_icon.png`)}
               alt="take a quiz"
             />
-            Take a Quiz
+            <h6 className={classes.listItemText}>Take a Quiz</h6>
           </NavLink>
         </li>
       )}
@@ -60,7 +60,7 @@ const MainHeader = () => {
         <li>
           <NavLink activeClassName={classes.active} to="/newToDo">
             <img src={require(`../../pictures/add_task.png`)} alt="add task" />
-            Add new task
+            <h6 className={classes.listItemText}>Add new task</h6>
           </NavLink>
         </li>
       )}
@@ -71,7 +71,7 @@ const MainHeader = () => {
               src={require(`../../pictures/see_tasks.png`)}
               alt="see tasks"
             />
-            Tasks To Do
+            <h6 className={classes.listItemText}>Tasks To Do</h6>
             <span className={classes.numOfTasks}>{numberOfTasks}</span>
           </NavLink>
         </li>
@@ -80,7 +80,7 @@ const MainHeader = () => {
         <li>
           <NavLink activeClassName={classes.active} to="/Login">
             <img src={require(`../../pictures/login.png`)} alt="log in" />
-            Log in
+            <h6 className={classes.listItemText}>Log in</h6>
           </NavLink>
         </li>
       )}
@@ -92,7 +92,7 @@ const MainHeader = () => {
             onClick={authCtx.logout}
           >
             <img src={require(`../../pictures/logout.png`)} alt="log in" />
-            Log out
+            <h6 className={classes.listItemText}>Log out</h6>
           </NavLink>
         </li>
       )}

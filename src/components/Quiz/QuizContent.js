@@ -18,8 +18,8 @@ const QuizContent = (props) => {
 
   const switchQuestionHandler = (e, nextQuestion = true) => {
     e.preventDefault();
-    quizCtx.setAnswer(givenAnswer, quizCtx.indexOfQuestion);
 
+    quizCtx.setAnswer(givenAnswer, quizCtx.indexOfQuestion);
     props.onSwitchQuestion(nextQuestion);
   };
 
@@ -30,7 +30,6 @@ const QuizContent = (props) => {
   const showModal = (e) => {
     e.preventDefault();
     nextQuestionHandler(e);
-    console.log(quizCtx.answers);
     if (quizCtx.answers.length !== 10) {
       setError("Some questions are not answered.");
       return;

@@ -31,14 +31,14 @@
   text-decoration: none;
 }
 
+.headerList li {
+  margin: 0 1rem;
+}
+
 .headerList li a:hover {
   cursor: pointer;
   color: rgb(200, 205, 213);
 }
-
-/* .active {
-  color: rgb(150, 163, 183);
-} */
 
 .numOfTasks {
   font-size: 1rem;
@@ -82,6 +82,12 @@ nav {
 
 .hamburgerDeactivated {
   animation: menuAnimation 0.3s reverse;
+}
+
+.listItemText {
+  font-weight: normal;
+  font-size: 24px;
+  display: inline-block;
 }
 
 @keyframes menuAnimation {
@@ -137,5 +143,36 @@ nav {
 @media (max-width: 1024px) and (orientation: landscape) {
   .header {
     padding: 2rem 1rem 2rem 3rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1086px) {
+  .header {
+    padding: 0;
+  }
+
+  .headerList {
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 830px) {
+  .headerList li,
+  .headerList li a {
+    margin: 0 0.2rem;
+  }
+}
+
+@media (min-width: 831px) and (max-width: 950px) {
+  .headerList li,
+  .headerList li a {
+    margin: 0 0.4rem;
+  }
+}
+
+@media (min-width: 951px) and (max-width: 1086px) {
+  .headerList li,
+  .headerList li a {
+    margin: 0 0.6rem;
   }
 }

@@ -43,6 +43,7 @@ const StartQuiz = () => {
             just a branch of computer science is highly valuable nowadays. Check
             out your knowledge with the following quiz.
           </p>
+          {/* Opis do poprawy */}
           <button className={classes.startQuizButton} onClick={showQuizHandler}>
             Take quiz
           </button>

@@ -10,7 +10,7 @@
 
 .quizHeader {
   text-align: center;
-  margin: 2rem 0;
+  padding: 2rem 0;
 }
 
 /* .quizMainWrapper {
@@ -58,12 +58,48 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3rem;
+  padding-top: 3rem;
   gap: 3rem;
 }
 
 @media (max-width: 917px) {
   .quizMainWrapper img {
     display: none;
+  }
+
+  .quizHeader {
+    text-align: center;
+    padding: 0.75rem 0;
+    font-size: 22px;
+  }
+
+  .quizDescription {
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .quizQuestionsWrapper {
+    padding: 1rem 0 0;
+  }
+
+  .quizMainWrapper {
+    position: static;
+    transform: translate(0, 0);
+    margin: 0 auto;
+    width: 75%;
+    margin-top: 10vh;
+  }
+}
+
+@media (orientation: landscape) and (max-width: 1000px) {
+  .quizQuestionsWrapper {
+    padding: 0;
+    gap: 1rem;
+  }
+
+  .quizDescription {
+    font-size: 16px;
   }
 }

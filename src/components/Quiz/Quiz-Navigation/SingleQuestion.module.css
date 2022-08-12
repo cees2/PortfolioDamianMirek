@@ -18,3 +18,11 @@
 .activeNaviItem {
   background-color: rgb(8, 65, 44);
 }
+
+@media (max-width: 480px), (orientation: landscape) {
+  .quizNavigationItem {
+    flex-grow: 0;
+    flex-basis: 18%;
+    margin-top: 16px;
+  }
+}

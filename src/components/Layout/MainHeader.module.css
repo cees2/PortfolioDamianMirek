@@ -147,10 +147,6 @@ nav {
 }
 
 @media (min-width: 769px) and (max-width: 1086px) {
-  .header {
-    padding: 0;
-  }
-
   .headerList {
     margin-right: 0;
   }
@@ -160,6 +156,9 @@ nav {
   .headerList li,
   .headerList li a {
     margin: 0 0.2rem;
+  }
+  .header {
+    padding: 2rem 1rem 2rem 2rem;
   }
 }
 

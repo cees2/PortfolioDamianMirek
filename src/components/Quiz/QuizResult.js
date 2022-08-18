@@ -4,9 +4,13 @@ import { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 const MESSAGES = [
+  { score: 0, message: "Poor result, start learning and try again." },
   { score: 20, message: "Could have been better." },
-  { score: 40, message: "Refresh your knowlegde, and try again." },
-  { score: 60, message: "Could have been better" },
+  { score: 40, message: "Refresh your knowlegde and try again." },
+  {
+    score: 60,
+    message: "Good job, keep learning and you will become a master",
+  },
   { score: 80, message: "Not bad, almost there." },
   { score: 100, message: "Excellent, your are a true techie" },
 ];
@@ -16,20 +20,20 @@ const QuizResult = () => {
   const [message, setMessage] = useState("");
   const quizCtx = useContext(QuizContext);
   const history = useHistory();
-  const result = 20;
+  const result = quizCtx.getResult();
 
   useEffect(() => {
     if (score !== result) {
-      setTimeout(() => setScore((prevScore) => ++prevScore), 20);
+      setTimeout(() => setScore((prevScore) => prevScore + 5), 100);
     } else {
+      console.log("exec");
       const quizResultMessage = MESSAGES.reduce(
         (acc, message) =>
           result === message.score || result === message.score - 10
             ? message.message
-            : "",
+            : acc + "",
         ""
       );
-      console.log(quizResultMessage);
       setMessage(quizResultMessage);
     }
   }, [score, result]);

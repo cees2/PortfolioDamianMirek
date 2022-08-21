@@ -19,7 +19,7 @@
   background-color: rgb(8, 65, 44);
 }
 
-@media (max-width: 480px), (orientation: landscape) {
+@media (max-width: 1000px) {
   .quizNavigationItem {
     flex-grow: 0;
     flex-basis: 18%;

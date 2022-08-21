@@ -1,6 +1,6 @@
 import classes from "./QuizNavigation.module.css";
 import QuizContext from "../../../store/quiz-context";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import SingleQuestion from "./SingleQuestion";
 
 const QuizNavigation = () => {

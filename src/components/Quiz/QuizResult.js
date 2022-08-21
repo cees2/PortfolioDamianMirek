@@ -2,6 +2,7 @@ import classes from "./QuizResult.module.css";
 import QuizContext from "../../store/quiz-context";
 import { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import Card from "../UI/Card";
 
 const MESSAGES = [
   { score: 0, message: "Poor result, start learning and try again." },
@@ -49,7 +50,7 @@ const QuizResult = () => {
   };
 
   return (
-    <section className={classes.quizResultWrapper}>
+    <Card class={classes.quizResultWrapper}>
       <h2 className={classes.quizResultHeader}>Your result:</h2>
       <div className={classes.score}>
         <div
@@ -69,7 +70,7 @@ const QuizResult = () => {
         <button onClick={endQuizzingHandler}>End quizzing</button>
         <button onClick={anotherQuizHandler}>Take another quiz</button>
       </div>
-    </section>
+    </Card>
   );
 };
 

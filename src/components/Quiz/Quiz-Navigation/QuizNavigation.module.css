@@ -13,7 +13,7 @@
   }
 }
 
-@media (max-width: 1000px) and (orientation: landscape) {
+@media (min-width: 481px) and (max-width: 1000px) {
   .questionsNavigation {
     flex-wrap: wrap;
     width: 70%;

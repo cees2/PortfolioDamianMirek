@@ -1,4 +1,4 @@
-import React from "react";
+import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
@@ -9,13 +9,15 @@ import { QuizContextProvider } from "./store/quiz-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <QuizContextProvider>
-    <AuthContextProvider>
-      <TaskContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </TaskContextProvider>
-    </AuthContextProvider>
-  </QuizContextProvider>
+  <StrictMode>
+    <QuizContextProvider>
+      <AuthContextProvider>
+        <TaskContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </TaskContextProvider>
+      </AuthContextProvider>
+    </QuizContextProvider>
+  </StrictMode>
 );

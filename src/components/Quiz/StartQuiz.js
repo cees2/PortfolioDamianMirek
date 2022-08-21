@@ -37,11 +37,11 @@ const StartQuiz = () => {
         />
         <div className={classes.quizImageAndDescription}>
           <p className={classes.quizDescription}>
-            Computer science is a fast-developing branch of industry. Without
-            this kind of technology our world would be a totally different
-            place. It makes our lives simpler and better. Deep undestanding of
-            just a branch of computer science is highly valuable nowadays. Check
-            out your knowledge with the following quiz.
+            Computer science is a fast-developing part of industry. Imagine our
+            world Without this kind of technology - it would be a totally
+            different place. It makes our lives simpler and better. Deep
+            undestanding of just a branch of computer science is highly valuable
+            nowadays. Check out your knowledge with the following quiz.
           </p>
           {/* Opis do poprawy */}
           <button className={classes.startQuizButton} onClick={showQuizHandler}>

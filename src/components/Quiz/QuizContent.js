@@ -1,10 +1,11 @@
 import classes from "./QuizContent.module.css";
 import Answer from "./Answer";
 import QuizContext from "../../store/quiz-context";
-import React, { Fragment, useContext, useState } from "react";
+import React, { useContext, useState, Fragment } from "react";
 import ReactDOM from "react-dom";
 import ConfirmationModal from "../UI/ConfirmationModal";
 import { useHistory } from "react-router-dom";
+import Card from "../UI/Card";
 
 const QuizContent = (props) => {
   const [modalIsClosed, setModalIsClosed] = useState(true);
@@ -61,7 +62,7 @@ const QuizContent = (props) => {
 
   return (
     <Fragment>
-      <section className={classes.quizContentWrapper}>
+      <Card class={classes.quizContentWrapper}>
         {!modalIsClosed && modal}
         <h1 className={classes.quizQuestion}>{question.question}</h1>
         <form className={classes.singleQuestionForm}>
@@ -86,7 +87,7 @@ const QuizContent = (props) => {
             )}
           </div>
         </form>
-      </section>
+      </Card>
       <div
         className={`${classes.errorBanner} ${
           error ? `${classes.activeErrorBanner}` : ""

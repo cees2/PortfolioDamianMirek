@@ -5,6 +5,7 @@ import { useContext } from "react";
 import TaskContext from "./../../store/tasks-context";
 import AuthContext from "../../store/auth-context";
 import { Link } from "react-router-dom";
+import Card from "../UI/Card";
 
 const NewToDo = () => {
   const [error, setError] = useState(null);
@@ -67,31 +68,33 @@ const NewToDo = () => {
           </p>
         </div>
       )}
-      <form onSubmit={formSubmitHandler} className={classes.taskInput}>
-        <div className={classes.taskToDo}>
-          <label htmlFor="task">Task</label>
-          <input type="text" id="task" ref={taskRef} />
-          {error && (
-            <div className={classes.errorWrapper}>
-              <img
-                src={require("../../pictures/error.png")}
-                alt="Error icon"
-                className={classes.errorIcon}
-              />
-              <p className={classes.errorInformation}>{error}</p>
-            </div>
-          )}
-        </div>
-        <div className={classes.option}>
-          <label htmlFor="option">Priority</label>
-          <select className={classes.optionInput} ref={priorityRef}>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select>
-        </div>
-        <button className={classes.submitButton}>Add task</button>
-      </form>
+      <Card class={classes.taskInput}>
+        <form onSubmit={formSubmitHandler}>
+          <div className={classes.taskToDo}>
+            <label htmlFor="task">Task</label>
+            <input type="text" id="task" ref={taskRef} />
+            {error && (
+              <div className={classes.errorWrapper}>
+                <img
+                  src={require("../../pictures/error.png")}
+                  alt="Error icon"
+                  className={classes.errorIcon}
+                />
+                <p className={classes.errorInformation}>{error}</p>
+              </div>
+            )}
+          </div>
+          <div className={classes.option}>
+            <label htmlFor="option">Priority</label>
+            <select className={classes.optionInput} ref={priorityRef}>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+          <button className={classes.submitButton}>Add task</button>
+        </form>
+      </Card>
     </Fragment>
   );
 };

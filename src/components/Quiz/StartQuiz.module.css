@@ -93,9 +93,8 @@
   }
 }
 
-@media (orientation: landscape) and (max-width: 1000px) {
+@media (min-width: 480px) and (max-width: 1000px) {
   .quizQuestionsWrapper {
-    padding: 0;
     gap: 1rem;
   }
 

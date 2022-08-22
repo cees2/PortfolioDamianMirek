@@ -1,11 +1,12 @@
 import classes from "./QuizContent.module.css";
 import Answer from "./Answer";
 import QuizContext from "../../store/quiz-context";
-import React, { useContext, useState, Fragment } from "react";
+import React, { useContext, useState, Fragment, useEffect } from "react";
 import ReactDOM from "react-dom";
 import ConfirmationModal from "../UI/ConfirmationModal";
 import { useHistory } from "react-router-dom";
 import Card from "../UI/Card";
+import Error from "../UI/Error";
 
 const QuizContent = (props) => {
   const [modalIsClosed, setModalIsClosed] = useState(true);
@@ -17,9 +18,14 @@ const QuizContent = (props) => {
   const answers = [...question.incorrect_answers, question.correct_answer];
   let givenAnswer;
 
+  useEffect(() => {
+    if (quizCtx.answers.length !== 10 && !modalIsClosed) {
+      setError("Some questions are not answered.");
+    }
+  }, [modalIsClosed, quizCtx.answers.length]);
+
   const switchQuestionHandler = (e, nextQuestion = true) => {
     e.preventDefault();
-
     quizCtx.setAnswer(givenAnswer, quizCtx.indexOfQuestion);
     props.onSwitchQuestion(nextQuestion);
   };
@@ -30,11 +36,11 @@ const QuizContent = (props) => {
 
   const showModal = (e) => {
     e.preventDefault();
-    nextQuestionHandler(e);
-    if (quizCtx.answers.length !== 10) {
+    if (quizCtx.answers.length < 9) {
       setError("Some questions are not answered.");
       return;
     }
+    quizCtx.setAnswer(givenAnswer, quizCtx.indexOfQuestion);
     setModalIsClosed(false);
   };
 
@@ -93,7 +99,7 @@ const QuizContent = (props) => {
           error ? `${classes.activeErrorBanner}` : ""
         }`}
       >
-        {error && <p className={`${classes.quizErrorMessage}`}>{error}</p>}
+        {error && <Error errorMessage="Some questions are not answered" />}
       </div>
     </Fragment>
   );

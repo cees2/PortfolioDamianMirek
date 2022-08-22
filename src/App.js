@@ -17,7 +17,6 @@ function App() {
   const authCtx = useContext(AuthContext);
   const quizCtx = useContext(QuizContext);
   const { token } = authCtx;
-  const { quizFinished } = quizCtx;
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(

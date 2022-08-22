@@ -9,12 +9,20 @@ const Answer = (props) => {
     props.id === 0 ? "A" : props.id === 1 ? "B" : props.id === 2 ? "C" : "D";
   const answer = `Ans ${charOfAnswer}`;
 
-  const getAnswer = () => props.onMarked(props.singleAnswer);
+  const getAnswer = () => {
+    props.onMarked(props.singleAnswer);
+  };
 
   useEffect(() => {
     const input = radioInputRef.current;
-    if (input.checked) input.checked = false;
-    if (quizCtx.answers.some((ans) => ans.givenAnswer === props.singleAnswer))
+    input.checked = false;
+    if (
+      quizCtx.answers.some(
+        (ans) =>
+          ans.givenAnswer === props.singleAnswer &&
+          ans.id === quizCtx.indexOfQuestion
+      )
+    )
       input.checked = true;
   });
 

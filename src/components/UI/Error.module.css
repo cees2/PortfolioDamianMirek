@@ -1,0 +1,23 @@
+.errorParagraph {
+  color: rgb(246, 57, 57);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.errorWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorIcon {
+  width: 25px;
+  margin-right: 10px;
+}
+
+.errorInformation {
+  margin: 4px 0;
+  color: rgb(246, 57, 57);
+  font-size: 20px;
+  font-weight: 600;
+}

@@ -4,6 +4,7 @@ import AuthContext from "../../store/auth-context";
 import { useContext, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Card from "../UI/Card";
+import Error from "../UI/Error";
 
 const LoginForm = (props) => {
   const [error, setError] = useState(false);
@@ -99,16 +100,7 @@ const LoginForm = (props) => {
           </Link>
         )}
         <div className={classes.submitButton}>
-          {error && (
-            <div className={classes.errorWrapper}>
-              <img
-                src={require("../../pictures/error.png")}
-                alt="Error icon"
-                className={classes.errorIcon}
-              />
-              <p className={classes.errorParagraph}>{error}</p>
-            </div>
-          )}
+          {error && <Error errorMessage={error} />}
 
           <button onClick={formSubmitHandler}>
             {props.type === "login" ? "Submit" : "Create Account"}

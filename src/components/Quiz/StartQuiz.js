@@ -1,4 +1,10 @@
-import React, { Fragment, useEffect, useState, useContext } from "react";
+import React, {
+  Fragment,
+  useEffect,
+  useState,
+  useContext,
+  useRef,
+} from "react";
 import classes from "./StartQuiz.module.css";
 import QuizContext from "../../store/quiz-context";
 import QuizContent from "./QuizContent";
@@ -7,24 +13,33 @@ import QuizNavigation from "./Quiz-Navigation/QuizNavigation";
 const StartQuiz = () => {
   const quizCtx = useContext(QuizContext);
   const [quizIsActive, setQuizIsActive] = useState(false);
+  const [difficulty, setDifficulty] = useState("easy");
+  const difficultyInputRef = useRef();
 
   useEffect(() => {
+    console.log(quizCtx.correctAnswers, difficulty);
     const getData = async function () {
       const response = await fetch(
-        "https://opentdb.com/api.php?amount=10&category=18&difficulty=hard"
+        `https://opentdb.com/api.php?amount=10&category=18&difficulty=${difficulty}`
       );
       const data = await response.json();
       quizCtx.setAllQuestions(data);
     };
     getData();
     quizCtx.indexDispatch({ type: "SETINDEX", payload: 0 });
-  }, []);
+
+    return () => quizCtx.resetQuizData();
+  }, [difficulty]);
 
   const showQuizHandler = () => setQuizIsActive(true);
 
   const switchQuestion = (nextQuestion = true) => {
     if (nextQuestion) quizCtx.indexDispatch({ type: "INCREMENT" });
     else quizCtx.indexDispatch({ type: "DECREMENT" });
+  };
+
+  const difficultyChangeHandler = () => {
+    setDifficulty(difficultyInputRef.current.value);
   };
 
   const startPage = (
@@ -43,10 +58,25 @@ const StartQuiz = () => {
             undestanding of just a branch of computer science is highly valuable
             nowadays. Check out your knowledge with the following quiz.
           </p>
-          {/* Opis do poprawy */}
-          <button className={classes.startQuizButton} onClick={showQuizHandler}>
-            Take quiz
-          </button>
+          <div className={classes.startQuizWrapper}>
+            <div className={classes.quizDifficulty}>
+              <h3 className={classes.quizDifficultyHeader}>Difficulty</h3>
+              <select
+                onChange={difficultyChangeHandler}
+                ref={difficultyInputRef}
+              >
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            </div>
+            <button
+              className={classes.startQuizButton}
+              onClick={showQuizHandler}
+            >
+              Take quiz
+            </button>
+          </div>
         </div>
       </div>
     </Fragment>

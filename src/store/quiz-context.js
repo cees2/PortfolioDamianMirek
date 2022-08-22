@@ -10,6 +10,7 @@ const QuizContext = createContext({
   setAnswer: (answer, id) => {},
   getQuestion: (questionId) => {},
   setAllQuestions: (questions) => {},
+  resetQuizData: () => {},
 });
 
 export const QuizContextProvider = (props) => {
@@ -35,11 +36,10 @@ export const QuizContextProvider = (props) => {
 
   const setAllQuestions = (questions) => {
     setQuestions((prevQuestions) => questions.results);
-    questions.results.forEach((result, i) =>
-      setCorrectAnswers((prevCorrectAnswers) => [
-        ...prevCorrectAnswers,
-        { id: i, answer: result.correct_answer },
-      ])
+    setCorrectAnswers(
+      questions.results.map((result, i) => {
+        return { id: i, answer: result.correct_answer };
+      })
     );
   };
 

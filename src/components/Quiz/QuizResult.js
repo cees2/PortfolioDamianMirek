@@ -22,12 +22,13 @@ const QuizResult = () => {
   const quizCtx = useContext(QuizContext);
   const history = useHistory();
   const result = quizCtx.getResult();
+  console.log("result: ", result);
 
   useEffect(() => {
-    if (score !== result) {
-      setTimeout(() => setScore((prevScore) => prevScore + 5), 100);
-    } else {
-      console.log("exec");
+    if (score < result) {
+      setTimeout(() => setScore((prevScore) => prevScore + 2), 30);
+    } else if (score >= result) {
+      setScore(result);
       const quizResultMessage = MESSAGES.reduce(
         (acc, message) =>
           result === message.score || result === message.score - 10

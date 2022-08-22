@@ -6,6 +6,7 @@ import TaskContext from "./../../store/tasks-context";
 import AuthContext from "../../store/auth-context";
 import { Link } from "react-router-dom";
 import Card from "../UI/Card";
+import Error from "../UI/Error";
 
 const NewToDo = () => {
   const [error, setError] = useState(null);
@@ -73,16 +74,7 @@ const NewToDo = () => {
           <div className={classes.taskToDo}>
             <label htmlFor="task">Task</label>
             <input type="text" id="task" ref={taskRef} />
-            {error && (
-              <div className={classes.errorWrapper}>
-                <img
-                  src={require("../../pictures/error.png")}
-                  alt="Error icon"
-                  className={classes.errorIcon}
-                />
-                <p className={classes.errorInformation}>{error}</p>
-              </div>
-            )}
+            {error && <Error errorMessage={error} />}
           </div>
           <div className={classes.option}>
             <label htmlFor="option">Priority</label>

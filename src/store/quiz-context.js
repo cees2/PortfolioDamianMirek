@@ -7,6 +7,7 @@ const QuizContext = createContext({
   answers: [],
   correctAnswers: [],
   indexDispatch: (index) => {},
+  getResult: () => {},
   setAnswer: (answer, id) => {},
   getQuestion: (questionId) => {},
   setAllQuestions: (questions) => {},

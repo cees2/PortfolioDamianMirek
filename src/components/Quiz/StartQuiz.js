@@ -17,7 +17,6 @@ const StartQuiz = () => {
   const difficultyInputRef = useRef();
 
   useEffect(() => {
-    console.log(quizCtx.correctAnswers, difficulty);
     const getData = async function () {
       const response = await fetch(
         `https://opentdb.com/api.php?amount=10&category=18&difficulty=${difficulty}`
@@ -27,8 +26,6 @@ const StartQuiz = () => {
     };
     getData();
     quizCtx.indexDispatch({ type: "SETINDEX", payload: 0 });
-
-    return () => quizCtx.resetQuizData();
   }, [difficulty]);
 
   const showQuizHandler = () => setQuizIsActive(true);

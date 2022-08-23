@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import Card from "../UI/Card";
 
 const MESSAGES = [
-  { score: 0, message: "Poor result, start learning and try again." },
+  { score: 0, message: "Poor result" },
   { score: 20, message: "Could have been better." },
   { score: 40, message: "Refresh your knowlegde and try again." },
   {
@@ -22,7 +22,6 @@ const QuizResult = () => {
   const quizCtx = useContext(QuizContext);
   const history = useHistory();
   const result = quizCtx.getResult();
-  console.log("result: ", result);
 
   useEffect(() => {
     if (score < result) {

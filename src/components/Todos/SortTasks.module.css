@@ -42,6 +42,23 @@
   transform: rotate(180deg);
 }
 
+.searchTaskByName {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.searchTaskByName input {
+  border-radius: 8px;
+}
+
+.searchTaskHeader {
+  margin-right: 1rem;
+  color: white;
+}
+
 @media (max-width: 768px) {
   .sortWrapper {
     width: 95%;

@@ -38,7 +38,7 @@ function App() {
     };
 
     fetchData();
-  }, [authCtx.userLocalId]); // this useEffect will be called only when user logs in.
+  }, [authCtx.userLocalId]);
 
   return (
     <Layout>
@@ -74,11 +74,14 @@ function App() {
             <JSQuizStartPage />
           </Route>
         )}
-        {token && ( // do poprawy, cos innego zamiast token.
+        {token && quizCtx.answers.length === 10 && (
           <Route path="/quizResult">
             <QuizResultPage />
           </Route>
         )}
+        <Route path="*">
+          <Redirect to="/home" />
+        </Route>
       </Switch>
     </Layout>
   );

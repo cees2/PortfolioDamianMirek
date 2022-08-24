@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import classes from "./ToDoList.module.css";
 import SingleToDo from "./SingleToDo";
@@ -7,9 +7,14 @@ import SortTasks from "./SortTasks";
 import ConfirmationModal from "./../UI/ConfirmationModal";
 
 const ToDoList = () => {
+  const taskCtx = useContext(TaskContext);
   const [modalIsClosed, setModalIsClosed] = useState(true);
   const [itemToBeDeleted, setItemToBeDeleted] = useState("");
-  const taskCtx = useContext(TaskContext);
+  const [tasksToRender, setTasksToRender] = useState(taskCtx.tasks);
+
+  useEffect(() => {
+    setTasksToRender(taskCtx.tasks);
+  }, [taskCtx.tasks]);
 
   const sortTasks = (sortedTasks) => {
     taskCtx.setTasks(sortedTasks);
@@ -42,9 +47,13 @@ const ToDoList = () => {
       });
   };
 
+  const searchingTaskHandler = (tasksToBeRendered) => {
+    setTasksToRender(tasksToBeRendered);
+  };
+
   const content =
-    taskCtx.tasks.length !== 0 ? (
-      taskCtx.tasks.map((task) => {
+    tasksToRender.length !== 0 ? (
+      tasksToRender.map((task) => {
         return (
           <SingleToDo
             key={task.id}
@@ -56,9 +65,13 @@ const ToDoList = () => {
           />
         );
       })
+    ) : tasksToRender.length === 0 && taskCtx.tasks.length !== 0 ? (
+      <p className={classes.information}>Not a task matched your search.</p>
     ) : (
       <p className={classes.information}>Not a single task here, add some.</p>
     );
+
+  console.log(tasksToRender.length, taskCtx.tasks.length);
 
   return (
     <React.Fragment>
@@ -71,7 +84,12 @@ const ToDoList = () => {
           />,
           document.getElementById("confirmation-modal")
         )}
-      {taskCtx.tasks.length && <SortTasks onTasksSorted={sortTasks} />}
+      {taskCtx.tasks.length && (
+        <SortTasks
+          onTasksSorted={sortTasks}
+          onSearchingTasks={searchingTaskHandler}
+        />
+      )}
       <div className={classes.listWrapper}>
         <ul className={classes.taskList}>{content}</ul>
       </div>

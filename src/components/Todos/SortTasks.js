@@ -1,10 +1,11 @@
-import React, { useRef, useContext, useState } from "react";
+import React, { useRef, useContext, useState, Fragment } from "react";
 import classes from "./SortTasks.module.css";
 import TaskContext from "../../store/tasks-context";
 
 const SortTasks = (props) => {
   const [arrowPosition, setArrowPosition] = useState(0); // 0 --> up, 1 --> down
   const sortRef = useRef();
+  const searchTaskRef = useRef();
   const taskCtx = useContext(TaskContext);
   const tasks = taskCtx.tasks;
 
@@ -77,32 +78,61 @@ const SortTasks = (props) => {
     sortHandler();
   };
 
+  const searchTaskHandler = () => {
+    const searchInputRef = searchTaskRef.current.value;
+
+    props.onSearchingTasks(
+      taskCtx.tasks.filter((task) =>
+        task.task
+          .toUpperCase()
+          .trim()
+          .includes(searchInputRef.toUpperCase().trim())
+      )
+    );
+  };
+
   return (
-    <div className={classes.sortWrapper}>
-      <label htmlFor="sort" className={classes.sortLabel}>
-        Sort by:
-      </label>
-      <select
-        id="sort"
-        name="sort"
-        onChange={sortHandler}
-        className={classes.selectSort}
-        ref={sortRef}
-      >
-        <option value="date" defaultValue>
-          Date
-        </option>
-        <option value="alphabet">Alphabet</option>
-        <option value="priority">Priority</option>
-      </select>
-      <button className={classes.order} onClick={changeSortOrderHandler}>
-        <img
-          src={require("../../pictures/up_arrow.png")}
-          alt="Up arrow"
-          className={classes.sortArrow}
-        />
-      </button>
-    </div>
+    <Fragment>
+      <div className={classes.sortWrapper}>
+        <label htmlFor="sort" className={classes.sortLabel}>
+          Sort by:
+        </label>
+        <select
+          id="sort"
+          name="sort"
+          onChange={sortHandler}
+          className={classes.selectSort}
+          ref={sortRef}
+        >
+          <option value="date" defaultValue>
+            Date
+          </option>
+          <option value="alphabet">Alphabet</option>
+          <option value="priority">Priority</option>
+          <option value="taskName">Task name</option>
+        </select>
+        <button className={classes.order} onClick={changeSortOrderHandler}>
+          <img
+            src={require("../../pictures/up_arrow.png")}
+            alt="Up arrow"
+            className={classes.sortArrow}
+          />
+        </button>
+      </div>
+      {sortRef.current?.value === "taskName" && (
+        <div className={classes.searchTaskByName}>
+          <label htmlFor="searchTaskInput" className={classes.searchTaskHeader}>
+            Search task
+          </label>
+          <input
+            type="text"
+            id="searchTaskInput"
+            onChange={searchTaskHandler}
+            ref={searchTaskRef}
+          />
+        </div>
+      )}
+    </Fragment>
   );
 };
 

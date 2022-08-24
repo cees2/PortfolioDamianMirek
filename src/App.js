@@ -8,9 +8,8 @@ import TaskContext from "./store/tasks-context";
 import Login from "./pages/Login";
 import CreateAccount from "./pages/CreateAccount";
 import AuthContext from "./store/auth-context";
-import JSQuizStartPage from "./pages/JSQuizStartPage";
 import QuizContext from "./store/quiz-context";
-import QuizResultPage from "./pages/QuizResultPage";
+import Quiz from "./pages/Quiz";
 
 function App() {
   const taskCtx = useContext(TaskContext);
@@ -70,13 +69,8 @@ function App() {
           </Route>
         )}
         {token && (
-          <Route path="/JSQuizStartPage">
-            <JSQuizStartPage />
-          </Route>
-        )}
-        {token && quizCtx.answers.length === 10 && (
-          <Route path="/quizResult">
-            <QuizResultPage />
+          <Route path="/quiz">
+            <Quiz />
           </Route>
         )}
         <Route path="*">

@@ -1,12 +1,13 @@
 import classes from "./QuizContent.module.css";
 import Answer from "./Answer";
 import QuizContext from "../../store/quiz-context";
-import React, { useContext, useState, Fragment, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import ConfirmationModal from "../UI/ConfirmationModal";
 import { useHistory } from "react-router-dom";
 import Card from "../UI/Card";
 import Error from "../UI/Error";
+import QuizNavigation from "./Quiz-Navigation/QuizNavigation";
 
 const QuizContent = (props) => {
   const [modalIsClosed, setModalIsClosed] = useState(true);
@@ -14,8 +15,13 @@ const QuizContent = (props) => {
   const history = useHistory();
 
   const quizCtx = useContext(QuizContext);
-  const { question } = props;
-  const answers = [...question.incorrect_answers, question.correct_answer];
+
+  const answers = [
+    quizCtx.questions[quizCtx.indexOfQuestion].correct_answer,
+    ...quizCtx.questions[quizCtx.indexOfQuestion].incorrect_answers,
+  ];
+
+  const { question } = quizCtx.questions[quizCtx.indexOfQuestion];
   let givenAnswer;
 
   useEffect(() => {
@@ -24,10 +30,15 @@ const QuizContent = (props) => {
     }
   }, [modalIsClosed, quizCtx.answers.length]);
 
+  const switchQuestion = (nextQuestion = true) => {
+    if (nextQuestion) quizCtx.indexDispatch({ type: "INCREMENT" });
+    else quizCtx.indexDispatch({ type: "DECREMENT" });
+  };
+
   const switchQuestionHandler = (e, nextQuestion = true) => {
     e.preventDefault();
     quizCtx.setAnswer(givenAnswer, quizCtx.indexOfQuestion);
-    props.onSwitchQuestion(nextQuestion);
+    switchQuestion(nextQuestion);
   };
 
   const nextQuestionHandler = (e) => switchQuestionHandler(e);
@@ -45,7 +56,7 @@ const QuizContent = (props) => {
   };
 
   const finishQuizHandler = () => {
-    history.replace("/quizResult");
+    history.replace("/quiz/quizResult");
   };
 
   const hideModal = () => {
@@ -67,10 +78,11 @@ const QuizContent = (props) => {
     quizCtx.indexOfQuestion === 0 ? `${classes.hideNaviButton}` : ``;
 
   return (
-    <Fragment>
+    <div className={classes.quizQuestionsWrapper}>
+      <QuizNavigation />
       <Card class={classes.quizContentWrapper}>
         {!modalIsClosed && modal}
-        <h1 className={classes.quizQuestion}>{question.question}</h1>
+        <h1 className={classes.quizQuestion}>{question}</h1>
         <form className={classes.singleQuestionForm}>
           {answers.map((answer, i) => (
             <Answer
@@ -101,7 +113,7 @@ const QuizContent = (props) => {
       >
         {error && <Error errorMessage="Some questions are not answered" />}
       </div>
-    </Fragment>
+    </div>
   );
 };
 

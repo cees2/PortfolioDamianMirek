@@ -59,6 +59,12 @@
   font-size: 24px;
 }
 
+@media (min-width: 480px) and (max-width: 1000px) {
+  .quizQuestionsWrapper {
+    gap: 1rem;
+  }
+}
+
 @media (max-width: 1000px) and (orientation: landscape) {
   .quizResultWrapper {
     min-height: 15rem;
@@ -68,6 +74,10 @@
 @media (max-width: 480px) {
   .quizResultButtons button {
     font-size: 10px;
+  }
+
+  .quizQuestionsWrapper {
+    padding: 1rem 0 0;
   }
 }
 

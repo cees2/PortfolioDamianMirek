@@ -7,14 +7,13 @@ import React, {
 } from "react";
 import classes from "./StartQuiz.module.css";
 import QuizContext from "../../store/quiz-context";
-import QuizContent from "./QuizContent";
-import QuizNavigation from "./Quiz-Navigation/QuizNavigation";
+import { useHistory } from "react-router-dom";
 
 const StartQuiz = () => {
   const quizCtx = useContext(QuizContext);
-  const [quizIsActive, setQuizIsActive] = useState(false);
   const [difficulty, setDifficulty] = useState("easy");
   const difficultyInputRef = useRef();
+  const history = useHistory();
 
   useEffect(() => {
     quizCtx.resetQuizData();
@@ -29,18 +28,15 @@ const StartQuiz = () => {
     quizCtx.indexDispatch({ type: "SETINDEX", payload: 0 });
   }, [difficulty]);
 
-  const showQuizHandler = () => setQuizIsActive(true);
-
-  const switchQuestion = (nextQuestion = true) => {
-    if (nextQuestion) quizCtx.indexDispatch({ type: "INCREMENT" });
-    else quizCtx.indexDispatch({ type: "DECREMENT" });
+  const showQuizHandler = () => {
+    history.push("/quiz/quizContent");
   };
 
   const difficultyChangeHandler = () => {
     setDifficulty(difficultyInputRef.current.value);
   };
 
-  const startPage = (
+  return (
     <Fragment>
       <h1 className={classes.quizHeader}>Computer Science Quiz</h1>
       <div className={classes.quizMainWrapper}>
@@ -77,25 +73,6 @@ const StartQuiz = () => {
           </div>
         </div>
       </div>
-    </Fragment>
-  );
-
-  const quizContent = (
-    <div className={classes.quizQuestionsWrapper}>
-      <QuizNavigation />
-      {quizCtx.questions?.length && (
-        <QuizContent
-          question={quizCtx.questions[quizCtx.indexOfQuestion]}
-          onSwitchQuestion={switchQuestion}
-        />
-      )}
-    </div>
-  );
-
-  return (
-    <Fragment>
-      {!quizIsActive && startPage}
-      {quizIsActive && quizContent}
     </Fragment>
   );
 };

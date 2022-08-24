@@ -41,7 +41,7 @@ const QuizResult = () => {
 
   const anotherQuizHandler = () => {
     quizCtx.resetQuizData();
-    history.replace("/JSQuizStartPage");
+    history.replace("/quiz/quizStartPage");
   };
 
   const endQuizzingHandler = () => {

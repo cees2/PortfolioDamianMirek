@@ -63,7 +63,7 @@ const NewToDo = () => {
           <p className={classes.taskAdded}>
             Task has been successfully added.
             <br />
-            <Link to="/toDoApp" className={classes.seeTasksLink}>
+            <Link to="/tasks/toDoApp" className={classes.seeTasksLink}>
               See my tasks.
             </Link>
           </p>

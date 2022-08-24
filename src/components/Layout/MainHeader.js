@@ -88,7 +88,7 @@ const MainHeader = () => {
         <li>
           <NavLink
             activeClassName={classes.active}
-            to="/Home"
+            to="/home"
             onClick={authCtx.logout}
           >
             <img src={require(`../../pictures/logout.png`)} alt="log in" />

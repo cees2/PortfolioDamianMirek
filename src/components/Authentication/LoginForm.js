@@ -95,7 +95,7 @@ const LoginForm = (props) => {
           </div>
         )}
         {props.type === "login" && (
-          <Link to="/CreateAccount">
+          <Link to="/authentication/createAccount">
             <p className={classes.toNewAccount}>No account? Create one.</p>
           </Link>
         )}

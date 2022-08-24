@@ -1,20 +1,16 @@
 import React, { useEffect, useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import TasksToDo from "./pages/TasksToDo";
 import Layout from "./components/Layout/Layout";
-import AddToDo from "./pages/AddToDo";
 import TaskContext from "./store/tasks-context";
-import Login from "./pages/Login";
-import CreateAccount from "./pages/CreateAccount";
 import AuthContext from "./store/auth-context";
-import QuizContext from "./store/quiz-context";
 import Quiz from "./pages/Quiz";
+import Tasks from "./pages/Tasks";
+import Authentication from "./pages/Authentication";
 
 function App() {
   const taskCtx = useContext(TaskContext);
   const authCtx = useContext(AuthContext);
-  const quizCtx = useContext(QuizContext);
   const { token } = authCtx;
   useEffect(() => {
     const fetchData = async () => {
@@ -49,23 +45,13 @@ function App() {
           <HomePage />
         </Route>
         {token && (
-          <Route path="/newToDo">
-            <AddToDo />
-          </Route>
-        )}
-        {token && (
-          <Route path="/toDoApp">
-            <TasksToDo />
+          <Route path="/tasks">
+            <Tasks />
           </Route>
         )}
         {!token && (
-          <Route path="/Login">
-            <Login />
-          </Route>
-        )}
-        {!token && (
-          <Route path="/createAccount">
-            <CreateAccount />
+          <Route path="/authentication">
+            <Authentication />
           </Route>
         )}
         {token && (

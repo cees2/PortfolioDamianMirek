@@ -71,8 +71,6 @@ const ToDoList = () => {
       <p className={classes.information}>Not a single task here, add some.</p>
     );
 
-  console.log(tasksToRender.length, taskCtx.tasks.length);
-
   return (
     <React.Fragment>
       {!modalIsClosed &&

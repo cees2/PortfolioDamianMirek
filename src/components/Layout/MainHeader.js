@@ -58,7 +58,7 @@ const MainHeader = () => {
       )}
       {authCtx.token && (
         <li>
-          <NavLink activeClassName={classes.active} to="/newToDo">
+          <NavLink activeClassName={classes.active} to="/tasks/newToDo">
             <img src={require(`../../pictures/add_task.png`)} alt="add task" />
             <h6 className={classes.listItemText}>Add new task</h6>
           </NavLink>
@@ -66,7 +66,7 @@ const MainHeader = () => {
       )}
       {authCtx.token && (
         <li>
-          <NavLink activeClassName={classes.active} to="/toDoApp">
+          <NavLink activeClassName={classes.active} to="/tasks/toDoApp">
             <img
               src={require(`../../pictures/see_tasks.png`)}
               alt="see tasks"
@@ -78,7 +78,7 @@ const MainHeader = () => {
       )}
       {!authCtx.token && (
         <li>
-          <NavLink activeClassName={classes.active} to="/Login">
+          <NavLink activeClassName={classes.active} to="/authentication/login">
             <img src={require(`../../pictures/login.png`)} alt="log in" />
             <h6 className={classes.listItemText}>Log in</h6>
           </NavLink>

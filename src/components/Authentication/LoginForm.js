@@ -15,29 +15,39 @@ const LoginForm = (props) => {
   const typeOfComponent = props.type;
   const history = useHistory();
 
-  const checkValidity = function (emailInput, passwordInput) {
-    if (!emailInput.includes("@")) {
-      setError('Email has to include "@" symbol');
-      return false;
-    } else if (emailInput.indexOf("@") === 0) {
-      setError("Email can not start with '@' symbol");
-      return false;
-    } else if (!emailInput.includes(".")) {
-      setError('Email has to include "."(dot)');
-      return false;
-    } else if (emailInput.indexOf(".") === emailInput.length - 1) {
-      setError("Email can not end with '.'");
-      return false;
-    } else if (emailInput.length < 3) {
-      setError("Email is too short.");
-      return false;
-    } else if (passwordInput.trim().length < 6) {
-      setError("Password has to be at least 6 characters long.");
-      return false;
-    } else if (emailInput.trim().length < 6) {
-      setError("Email has to be at least 6 characters long.");
+  const checkValidity = function (inputRef, isEmail = true) {
+    const {
+      current: { value: input },
+    } = inputRef;
+    console.log("inputref", inputRef);
+    if (isEmail) {
+      if (!input.includes("@")) {
+        setError('Email has to include "@" symbol');
+        return false;
+      } else if (input.indexOf("@") === 0) {
+        setError("Email can not start with '@' symbol");
+        return false;
+      } else if (!input.includes(".")) {
+        setError('Email has to include "."(dot)');
+        return false;
+      } else if (input.indexOf(".") === input.length - 1) {
+        setError("Email can not end with '.'");
+        return false;
+      } else if (input.length < 3) {
+        setError("Email is too short.");
+        return false;
+      }
+    }
+    if (input.trim().length < 6) {
+      setError(
+        `${
+          isEmail ? "Email" : "Password"
+        } has to be at least 6 characters long.`
+      );
       return false;
     }
+
+    setError(false);
 
     return true;
   };
@@ -47,7 +57,8 @@ const LoginForm = (props) => {
     const emailInput = emailInputRef.current.value;
     const passwordInput = passwordInputRef.current.value;
 
-    if (!checkValidity(emailInput, passwordInput)) return;
+    if (!checkValidity(emailInputRef)) return;
+    if (!checkValidity(passwordInputRef, false)) return;
 
     const inputData = {
       email: emailInput,
@@ -75,23 +86,44 @@ const LoginForm = (props) => {
     history.replace("/home");
   };
 
+  const inputBlurHandler = (e) => {
+    if (e.target.id === "email") checkValidity(emailInputRef);
+    else if (e.target.id === "pass") checkValidity(passwordInputRef, false);
+    else checkValidity(confirmPasswordInputRef, false);
+  };
+
   return (
     <Card class={classes.loginWrapper}>
       <form className={classes.loginInput}>
         <div className={classes.formInput}>
           <label htmlFor="email">Email</label>
-          <input type="text" id="email" ref={emailInputRef} />
+          <input
+            type="text"
+            id="email"
+            ref={emailInputRef}
+            onBlur={inputBlurHandler}
+          />
         </div>
         <div className={classes.formInput}>
           <label htmlFor="pass">
             {typeOfComponent === "createAccount" && "Set"} Password
           </label>
-          <input type="password" id="pass" ref={passwordInputRef} />
+          <input
+            type="password"
+            id="pass"
+            ref={passwordInputRef}
+            onBlur={inputBlurHandler}
+          />
         </div>
         {props.type === "createAccount" && (
           <div className={classes.formInput}>
             <label htmlFor="conf">Confirm Password</label>
-            <input type="password" id="conf" ref={confirmPasswordInputRef} />
+            <input
+              type="password"
+              id="conf"
+              ref={confirmPasswordInputRef}
+              onBlur={inputBlurHandler}
+            />
           </div>
         )}
         {props.type === "login" && (

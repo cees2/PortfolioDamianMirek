@@ -4,6 +4,7 @@ import React, {
   useState,
   Fragment,
   useEffect,
+  useCallback,
 } from "react";
 import classes from "./SortTasks.module.css";
 import TaskContext from "../../store/tasks-context";
@@ -63,15 +64,18 @@ const SortTasks = (props) => {
       });
   };
 
-  const executeSorting = (sortDecision) => {
-    if (sortDecision === "alphabet") {
-      props.onTasksSorted(sortByAlphabet());
-    } else if (sortDecision === "priority") {
-      props.onTasksSorted(sortByPriority());
-    } else if (sortDecision === "date") {
-      props.onTasksSorted(sortByDate());
-    }
-  };
+  const executeSorting = useCallback(
+    (sortDecision) => {
+      if (sortDecision === "alphabet") {
+        props.onTasksSorted(sortByAlphabet());
+      } else if (sortDecision === "priority") {
+        props.onTasksSorted(sortByPriority());
+      } else if (sortDecision === "date") {
+        props.onTasksSorted(sortByDate());
+      }
+    },
+    [arrowPosition]
+  );
 
   const sortHandler = (e, changedOrder = false) => {
     const sortDecision = sortRef.current.value;
@@ -108,10 +112,9 @@ const SortTasks = (props) => {
   };
 
   useEffect(() => {
-    console.log(arrowPosition);
     const sortDecision = sortRef.current.value;
     executeSorting(sortDecision);
-  }, [arrowPosition]);
+  }, [arrowPosition, executeSorting]);
 
   return (
     <Fragment>

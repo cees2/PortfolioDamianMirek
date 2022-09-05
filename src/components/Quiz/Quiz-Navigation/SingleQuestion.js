@@ -6,6 +6,7 @@ const SingleQuestion = (props) => {
   const quizCtx = useContext(QuizContext);
 
   const listItemClickHandler = () => {
+    props.onNaviClick();
     quizCtx.indexDispatch({ type: "SETINDEX", payload: props.id });
   };
 

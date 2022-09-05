@@ -74,12 +74,16 @@ const QuizContent = (props) => {
     document.getElementById("confirmation-modal")
   );
 
+  const saveAnswerWhenNaviClick = () => {
+    quizCtx.setAnswer(givenAnswer, quizCtx.indexOfQuestion);
+  };
+
   const prevButtonClass =
     quizCtx.indexOfQuestion === 0 ? `${classes.hideNaviButton}` : ``;
 
   return (
     <div className={classes.quizQuestionsWrapper}>
-      <QuizNavigation />
+      <QuizNavigation onNaviClick={saveAnswerWhenNaviClick} />
       <Card class={classes.quizContentWrapper}>
         {!modalIsClosed && modal}
         <h1 className={classes.quizQuestion}>{question}</h1>

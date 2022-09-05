@@ -18,5 +18,5 @@ export const getQuizResult = (correctAnswers, usersAnswers) => {
     correctAnswers.filter((corAns) =>
       usersAnswers.some((ans) => corAns.answer === ans.givenAnswer)
     ).length * 10
-  ); // do poprawy
+  );
 };

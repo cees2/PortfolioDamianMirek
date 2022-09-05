@@ -1,9 +1,3 @@
-.errorParagraph {
-  color: rgb(246, 57, 57);
-  font-size: 20px;
-  font-weight: 600;
-}
-
 .errorWrapper {
   display: flex;
   justify-content: center;
@@ -17,7 +11,7 @@
 
 .errorInformation {
   margin: 4px 0;
-  color: rgb(246, 57, 57);
+  color: #ff6d6d;
   font-size: 20px;
   font-weight: 600;
 }

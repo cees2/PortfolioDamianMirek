@@ -37,8 +37,8 @@ const NewToDo = () => {
         id: Math.random(),
         userId: authCtx.userLocalId,
         task:
-          taskRef.current.value.slice(0, 1).toUpperCase() +
-          taskRef.current.value.slice(1),
+          taskRef.current.value.trim().slice(0, 1).toUpperCase() +
+          taskRef.current.value.trim().slice(1),
         priority: priorityRef.current.value,
         date: new Date(),
       };

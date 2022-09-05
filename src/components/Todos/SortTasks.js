@@ -1,9 +1,16 @@
-import React, { useRef, useContext, useState, Fragment } from "react";
+import React, {
+  useRef,
+  useContext,
+  useState,
+  Fragment,
+  useEffect,
+} from "react";
 import classes from "./SortTasks.module.css";
 import TaskContext from "../../store/tasks-context";
 
 const SortTasks = (props) => {
   const [arrowPosition, setArrowPosition] = useState(0); // 0 --> up, 1 --> down
+  const [searchTaskActive, setSearchTaskActive] = useState(false);
   const sortRef = useRef();
   const searchTaskRef = useRef();
   const taskCtx = useContext(TaskContext);
@@ -19,6 +26,7 @@ const SortTasks = (props) => {
       return tasks.filter((task) => task.task === curTask);
     });
   };
+
   const sortByDate = () =>
     taskCtx.tasks
       .map((task) => new Date(task.date).getTime())
@@ -55,10 +63,7 @@ const SortTasks = (props) => {
       });
   };
 
-  const sortHandler = () => {
-    const sortDecision = sortRef.current.value;
-
-    setArrowPosition((prevPos) => ++prevPos % 2);
+  const executeSorting = (sortDecision) => {
     if (sortDecision === "alphabet") {
       props.onTasksSorted(sortByAlphabet());
     } else if (sortDecision === "priority") {
@@ -68,6 +73,17 @@ const SortTasks = (props) => {
     }
   };
 
+  const sortHandler = (e, changedOrder = false) => {
+    const sortDecision = sortRef.current.value;
+    if (changedOrder) {
+      setArrowPosition((prevPos) => ++prevPos % 2);
+      return;
+    } else if (sortDecision === "taskName") setSearchTaskActive(true);
+    else setSearchTaskActive(false);
+
+    executeSorting(sortDecision);
+  };
+
   const changeSortOrderHandler = (e) => {
     if (!e.target.classList.contains(`${classes.sortArrow}`)) return;
     e.target.className = `${
@@ -75,7 +91,7 @@ const SortTasks = (props) => {
         ? ""
         : classes.rotateArrow
     } ${classes.sortArrow}`;
-    sortHandler();
+    sortHandler(e, true);
   };
 
   const searchTaskHandler = () => {
@@ -90,6 +106,12 @@ const SortTasks = (props) => {
       )
     );
   };
+
+  useEffect(() => {
+    console.log(arrowPosition);
+    const sortDecision = sortRef.current.value;
+    executeSorting(sortDecision);
+  }, [arrowPosition]);
 
   return (
     <Fragment>
@@ -111,7 +133,11 @@ const SortTasks = (props) => {
           <option value="priority">Priority</option>
           <option value="taskName">Task name</option>
         </select>
-        <button className={classes.order} onClick={changeSortOrderHandler}>
+        <button
+          className={classes.order}
+          onClick={changeSortOrderHandler}
+          disabled={searchTaskActive}
+        >
           <img
             src={require("../../pictures/up_arrow.png")}
             alt="Up arrow"
@@ -119,7 +145,7 @@ const SortTasks = (props) => {
           />
         </button>
       </div>
-      {sortRef.current?.value === "taskName" && (
+      {searchTaskActive && (
         <div className={classes.searchTaskByName}>
           <label htmlFor="searchTaskInput" className={classes.searchTaskHeader}>
             Search task

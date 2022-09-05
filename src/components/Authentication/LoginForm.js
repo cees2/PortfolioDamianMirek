@@ -19,7 +19,6 @@ const LoginForm = (props) => {
     const {
       current: { value: input },
     } = inputRef;
-    console.log("inputref", inputRef);
     if (isEmail) {
       if (!input.includes("@")) {
         setError('Email has to include "@" symbol');

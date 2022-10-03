@@ -1,5 +1,7 @@
-const LOGIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDt96ic9vIPskghHCG03yyOX9j-FBdB3VY`;
-const CREATE_ACCOUND_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDt96ic9vIPskghHCG03yyOX9j-FBdB3VY`;
+const DOMAIN = `http://127.0.0.1:3000/`;
+
+const LOGIN_URL = `${DOMAIN}/api/v1/login`;
+const CREATE_ACCOUND_URL = `${DOMAIN}/api/v1/signup`;
 
 export const accountAJAXManager = async (inputData, login = true) => {
   try {

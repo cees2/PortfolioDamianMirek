@@ -21,17 +21,18 @@ form.loginInput {
 
 .formInput input {
   width: 60%;
-  border-radius: 6px;
   padding: 3px;
+  height: 2rem;
+  border: none;
+  font-size: 1rem;
+  background-color: inherit;
+  border-bottom: 1px solid white;
 }
 
 .formInput label {
+  display: block;
   color: white;
   margin: 1rem 0 0.5rem;
-}
-
-.formInput input {
-  display: block;
 }
 
 .submitButton {
@@ -40,12 +41,14 @@ form.loginInput {
 }
 
 .submitButton button {
-  font-size: 16px;
+  font-size: 20px;
   border-radius: 6px;
   width: 60%;
   padding: 10px 0;
   background-color: #a3ab78;
   border: none;
+  color: white;
+  font-weight: 600;
 }
 
 .submitButton button:hover {

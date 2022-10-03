@@ -1,40 +1,45 @@
 import { createContext, useState } from "react";
-import { accountAJAXManager } from "./auth-helpers";
+import { DOMAIN } from "../hooks/useHttp";
+import useHttp from "../hooks/useHttp";
+
+const LOGIN_URL = `${DOMAIN}/login`;
+const CREATE_ACCOUND_URL = `${DOMAIN}/signup`;
 
 const AuthContext = createContext({
   token: "",
-  userLocalId: "",
   login: (data) => {},
   logout: () => {},
   createAccount: () => {},
 });
 
 export const AuthContextProvider = (props) => {
+  const { sendRequest } = useHttp();
+
   const tokenInitialValue = localStorage.getItem("token")
     ? localStorage.getItem("token")
     : null;
-  const userIdInitialValue = localStorage.getItem("localId")
-    ? localStorage.getItem("localId")
-    : null;
   const [token, setToken] = useState(tokenInitialValue);
-  const [userLocalId, setUserLocalId] = useState(userIdInitialValue);
 
   const manageLocalStorage = (data) => {
     setToken((prevToken) => (prevToken = data?.token ?? ""));
-    setUserLocalId((prevId) => (prevId = data?.userId ?? ""));
 
     if (data) {
       localStorage.setItem("token", data.token);
-      localStorage.setItem("localId", data.userId);
       return;
     }
     localStorage.removeItem("token");
-    localStorage.removeItem("localId");
   };
 
   const login = async (inputData) => {
     try {
-      const data = await accountAJAXManager(inputData);
+      const data = await sendRequest({
+        url: "users/login",
+        method: "POST",
+        body: inputData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       manageLocalStorage(data);
     } catch (err) {
       throw err;
@@ -43,7 +48,14 @@ export const AuthContextProvider = (props) => {
 
   const createAccount = async (inputData) => {
     try {
-      const data = await accountAJAXManager(inputData, false);
+      const data = await sendRequest({
+        url: "users/signup",
+        method: "POST",
+        body: inputData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       manageLocalStorage(data);
     } catch (err) {
@@ -57,7 +69,6 @@ export const AuthContextProvider = (props) => {
 
   const authObject = {
     token,
-    userLocalId,
     login,
     logout,
     createAccount,

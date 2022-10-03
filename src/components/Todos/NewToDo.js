@@ -35,7 +35,6 @@ const NewToDo = () => {
       setError(false);
       const dataToBeSent = {
         id: Math.random(),
-        userId: authCtx.userLocalId,
         task:
           taskRef.current.value.trim().slice(0, 1).toUpperCase() +
           taskRef.current.value.trim().slice(1),

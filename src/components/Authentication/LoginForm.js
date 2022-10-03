@@ -12,6 +12,7 @@ const LoginForm = (props) => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const confirmPasswordInputRef = useRef();
+  const nameInputRef = useRef();
   const typeOfComponent = props.type;
   const history = useHistory();
 
@@ -62,7 +63,6 @@ const LoginForm = (props) => {
     const inputData = {
       email: emailInput,
       password: passwordInput,
-      returnSecureToken: true,
     };
 
     if (typeOfComponent === "createAccount") {
@@ -101,6 +101,7 @@ const LoginForm = (props) => {
             id="email"
             ref={emailInputRef}
             onBlur={inputBlurHandler}
+            placeholder="email"
           />
         </div>
         <div className={classes.formInput}>
@@ -115,15 +116,21 @@ const LoginForm = (props) => {
           />
         </div>
         {props.type === "createAccount" && (
-          <div className={classes.formInput}>
-            <label htmlFor="conf">Confirm Password</label>
-            <input
-              type="password"
-              id="conf"
-              ref={confirmPasswordInputRef}
-              onBlur={inputBlurHandler}
-            />
-          </div>
+          <>
+            <div className={classes.formInput}>
+              <label htmlFor="conf">Confirm Password</label>
+              <input
+                type="password"
+                id="conf"
+                ref={confirmPasswordInputRef}
+                onBlur={inputBlurHandler}
+              />
+            </div>
+            <div className={classes.formInput}>
+              <label htmlFor="name">Name</label>
+              <input id="name" ref={nameInputRef} onBlur={inputBlurHandler} />
+            </div>
+          </>
         )}
         {props.type === "login" && (
           <Link to="/authentication/createAccount">

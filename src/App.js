@@ -24,16 +24,11 @@ function App() {
 
       const usersTasks = [];
 
-      for (const key in responseData) {
-        if (responseData[key].userId === authCtx.userLocalId) {
-          usersTasks.push(responseData[key]);
-        }
-      }
       taskCtx.setTasks(usersTasks);
     };
 
     fetchData();
-  }, [authCtx.userLocalId]);
+  }, []);
 
   return (
     <Layout>

@@ -1,7 +1,7 @@
 .loginWrapper {
   margin: 10rem auto 0;
   width: 60%;
-  background-color: #506266;
+  background-color: white;
   align-items: center;
 }
 
@@ -26,13 +26,9 @@ form.loginInput {
   border: none;
   font-size: 1rem;
   background-color: inherit;
-  border-bottom: 1px solid white;
-}
-
-.formInput label {
-  display: block;
-  color: white;
-  margin: 1rem 0 0.5rem;
+  border-bottom: 1px solid black;
+  margin: 1rem 0;
+  outline: none;
 }
 
 .submitButton {
@@ -48,7 +44,6 @@ form.loginInput {
   background-color: #a3ab78;
   border: none;
   color: white;
-  font-weight: 600;
 }
 
 .submitButton button:hover {
@@ -58,7 +53,7 @@ form.loginInput {
 
 .toNewAccount {
   margin-top: 4px;
-  color: white;
+  color: #000;
   font-weight: 600;
   text-decoration: none;
 }

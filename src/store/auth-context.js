@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
-import { DOMAIN } from "../hooks/useHttp";
-import useHttp from "../hooks/useHttp";
+import { DOMAIN } from "../hooks/use-http";
+import useHttp from "../hooks/use-http";
 
 const LOGIN_URL = `${DOMAIN}/login`;
 const CREATE_ACCOUND_URL = `${DOMAIN}/signup`;

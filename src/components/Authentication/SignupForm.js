@@ -1,34 +1,41 @@
-import classes from "./LoginForm.module.css";
-import { Link } from "react-router-dom";
-import { useRef } from "react";
-import useAuth from "../../hooks/use-auth";
+import React, { useRef } from "react";
 import Card from "../UI/Card";
 import Error from "../UI/Error";
+import classes from "./LoginForm.module.css";
+import useAuth from "../../hooks/use-auth";
 
-const LoginForm = (props) => {
+const SignupForm = () => {
+  const nameInputRef = useRef();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const confirmPasswordInputRef = useRef();
   const { validateEmail, validatePassword, error, formSubmitHandler } =
     useAuth();
 
-  const emailInputBlurHandler = () =>
+  const emailInputBlurHandler = () => {
     validateEmail(emailInputRef.current.value);
-
-  const passwordInputBlurHandler = () =>
+  };
+  const passwordInputBlurHandler = () => {
     validatePassword(passwordInputRef.current.value);
+  };
 
-  const loginSubmitHandler = (e) => {
+  const SignupSubmitHandler = (e) => {
     const payload = {
+      name: nameInputRef.current.value,
       email: emailInputRef.current.value,
       password: passwordInputRef.current.value,
+      passwordConfirm: confirmPasswordInputRef.current.value,
     };
 
-    formSubmitHandler(e, payload);
+    formSubmitHandler(e, payload, false);
   };
 
   return (
     <Card class={classes.loginWrapper}>
       <form className={classes.loginInput}>
+        <div className={classes.formInput}>
+          <input id="name" ref={nameInputRef} placeholder="Name" />
+        </div>
         <div className={classes.formInput}>
           <input
             type="text"
@@ -47,16 +54,21 @@ const LoginForm = (props) => {
             placeholder="Password"
           />
         </div>
-        <Link to="/authentication/createAccount">
-          <p className={classes.toNewAccount}>No account? Create one.</p>
-        </Link>
+        <div className={classes.formInput}>
+          <input
+            type="password"
+            id="conf"
+            ref={confirmPasswordInputRef}
+            placeholder="Confirm password"
+          />
+        </div>
         <div className={classes.submitButton}>
           {error && <Error errorMessage={error} />}
-          <button onClick={loginSubmitHandler}>Submit</button>
+          <button onClick={SignupSubmitHandler}>Submit</button>
         </div>
       </form>
     </Card>
   );
 };
 
-export default LoginForm;
+export default SignupForm;

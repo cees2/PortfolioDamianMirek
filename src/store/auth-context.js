@@ -34,6 +34,7 @@ export const AuthContextProvider = (props) => {
         body: inputData,
         headers: {
           "Content-Type": "application/json",
+          withCredentials: true,
         },
       });
 
@@ -52,6 +53,7 @@ export const AuthContextProvider = (props) => {
         body: inputData,
         headers: {
           "Content-Type": "application/json",
+          withCredentials: true,
         },
       });
 

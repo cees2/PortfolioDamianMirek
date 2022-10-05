@@ -1,9 +1,5 @@
 import { createContext, useState } from "react";
-import { DOMAIN } from "../hooks/use-http";
 import useHttp from "../hooks/use-http";
-
-const LOGIN_URL = `${DOMAIN}/login`;
-const CREATE_ACCOUND_URL = `${DOMAIN}/signup`;
 
 const AuthContext = createContext({
   token: "",
@@ -40,7 +36,9 @@ export const AuthContextProvider = (props) => {
           "Content-Type": "application/json",
         },
       });
+
       manageLocalStorage(data);
+      return data;
     } catch (err) {
       throw err;
     }

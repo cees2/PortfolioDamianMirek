@@ -3,7 +3,6 @@ import classes from "./NewToDo.module.css";
 import { useRef, useState } from "react";
 import { useContext } from "react";
 import TaskContext from "./../../store/tasks-context";
-import AuthContext from "../../store/auth-context";
 import { Link } from "react-router-dom";
 import Card from "../UI/Card";
 import Error from "../UI/Error";
@@ -15,14 +14,14 @@ const NewToDo = () => {
   const taskRef = useRef();
   const priorityRef = useRef();
   const taskCtx = useContext(TaskContext);
-  const authCtx = useContext(AuthContext);
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
     if (
       taskCtx.tasks.some(
         (singleTask) =>
-          singleTask.task.toUpperCase() === taskRef.current.value.toUpperCase()
+          singleTask.taskDescription.toUpperCase() ===
+          taskRef.current.value.toUpperCase()
       )
     ) {
       setError("This task already exists.");
@@ -34,12 +33,10 @@ const NewToDo = () => {
       setTaskAdded(true);
       setError(false);
       const dataToBeSent = {
-        id: Math.random(),
-        task:
+        taskDescription:
           taskRef.current.value.trim().slice(0, 1).toUpperCase() +
           taskRef.current.value.trim().slice(1),
         priority: priorityRef.current.value,
-        date: new Date(),
       };
       taskCtx.addTask(dataToBeSent);
       taskRef.current.value = "";

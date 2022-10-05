@@ -29,9 +29,10 @@ const useAuth = () => {
       password: passwordInput,
     };
 
+    let user;
     if (loginHandler) {
       try {
-        await authCtx.login(inputData);
+        user = await authCtx.login(inputData);
       } catch (err) {
         setError(err.message);
         return;
@@ -41,14 +42,14 @@ const useAuth = () => {
       inputData.name = payload.name;
 
       try {
-        await authCtx.createAccount(inputData);
+        user = await authCtx.createAccount(inputData);
       } catch (err) {
         setError(err.message);
         return;
       }
     }
-
     history.replace("/home");
+    return user;
   };
 
   return {

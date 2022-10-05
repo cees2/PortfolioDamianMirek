@@ -1,7 +1,9 @@
+import { useCallback } from "react";
+
 export const DOMAIN = `http://127.0.0.1:3000/api/v1`;
 
 const useHttp = () => {
-  const sendRequest = async (fetchOptions) => {
+  const sendRequest = useCallback(async (fetchOptions) => {
     try {
       const response = await fetch(`${DOMAIN}/${fetchOptions.url}`, {
         method: fetchOptions.method ? fetchOptions.method : "GET",
@@ -19,7 +21,7 @@ const useHttp = () => {
     } catch (err) {
       throw err;
     }
-  };
+  }, []);
 
   return { sendRequest };
 };

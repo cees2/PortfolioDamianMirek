@@ -1,13 +1,15 @@
 import classes from "./LoginForm.module.css";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import useAuth from "../../hooks/use-auth";
 import Card from "../UI/Card";
 import Error from "../UI/Error";
+import TaskContext from "../../store/tasks-context";
 
 const LoginForm = (props) => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const taskCtx = useContext(TaskContext);
   const { validateEmail, validatePassword, error, formSubmitHandler } =
     useAuth();
 
@@ -17,13 +19,15 @@ const LoginForm = (props) => {
   const passwordInputBlurHandler = () =>
     validatePassword(passwordInputRef.current.value);
 
-  const loginSubmitHandler = (e) => {
+  const loginSubmitHandler = async (e) => {
     const payload = {
       email: emailInputRef.current.value,
       password: passwordInputRef.current.value,
     };
 
-    formSubmitHandler(e, payload);
+    const user = await formSubmitHandler(e, payload);
+
+    taskCtx.setTasks(user.data.user.tasks); // do poprawy
   };
 
   return (

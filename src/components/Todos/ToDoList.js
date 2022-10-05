@@ -9,15 +9,15 @@ import ConfirmationModal from "./../UI/ConfirmationModal";
 const ToDoList = () => {
   const taskCtx = useContext(TaskContext);
   const [modalIsClosed, setModalIsClosed] = useState(true);
-  const [itemToBeDeleted, setItemToBeDeleted] = useState("");
   const [tasksToRender, setTasksToRender] = useState(taskCtx.tasks);
+  console.log("exec");
 
   useEffect(() => {
     setTasksToRender(taskCtx.tasks);
   }, [taskCtx.tasks]);
 
   const sortTasks = (sortedTasks) => {
-    taskCtx.setTasks(sortedTasks);
+    taskCtx.setTasks(sortedTasks); // do poprawy !!!!!
   };
 
   const hideModal = () => {
@@ -26,25 +26,10 @@ const ToDoList = () => {
 
   const showModal = (itemId) => {
     setModalIsClosed(false);
-    setItemToBeDeleted(itemId);
   };
 
   const deleteTaskHandler = () => {
-    let idOfItemInDatabase;
-    fetch(
-      "https://react-http-d03fd-default-rtdb.europe-west1.firebasedatabase.app/tasksToDo.json"
-    )
-      .then((response) => response.json())
-      .then((responseData) => {
-        for (const key in responseData) {
-          if (responseData[key].id === itemToBeDeleted) {
-            idOfItemInDatabase = key;
-            taskCtx.removeTask(idOfItemInDatabase, itemToBeDeleted);
-          }
-        }
-        setItemToBeDeleted("");
-        setModalIsClosed(true);
-      });
+    setModalIsClosed(true);
   };
 
   const searchingTaskHandler = (tasksToBeRendered) => {
@@ -56,11 +41,11 @@ const ToDoList = () => {
       tasksToRender.map((task) => {
         return (
           <SingleToDo
-            key={task.id}
-            id={task.id}
+            key={task._id}
+            id={task._id}
             priority={task.priority}
-            task={task.task}
-            date={task.date}
+            task={task.taskDescription}
+            date={task.dateCreated}
             onDeleteTask={showModal}
           />
         );

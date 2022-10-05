@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext, useCallback } from "react";
+import useHttp from "../hooks/use-http";
+import AuthContext from "./auth-context";
 
 const TaskContext = createContext({
   tasks: [],
@@ -9,28 +11,44 @@ const TaskContext = createContext({
 
 export const TaskContextProvider = (props) => {
   const [tasksToDo, setTasksToDo] = useState([]);
+  const { sendRequest } = useHttp();
+  const authCtx = useContext(AuthContext);
 
-  const addTask = (taskToAdd) => {
-    setTasksToDo((prevTasks) => [...prevTasks, taskToAdd]);
-    fetch(
-      "https://react-http-d03fd-default-rtdb.europe-west1.firebasedatabase.app/tasksToDo.json",
-      {
-        method: "POST",
-        body: JSON.stringify(taskToAdd),
+  const getUsersTasks = useCallback(
+    async () =>
+      await sendRequest({
+        url: "users/getMyTasks",
         headers: {
-          "Content-Type": "application/json",
+          Authorization: `Bearer ${authCtx.token}`,
         },
-      }
-    );
+      }),
+    [authCtx.token, sendRequest]
+  );
+
+  const addTask = async (taskToAdd) => {
+    await sendRequest({
+      url: "tasks/",
+      method: "POST",
+      body: taskToAdd,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authCtx.token}`,
+      },
+    });
+
+    const updatedTaskList = await getUsersTasks();
+
+    setTasksToDo(updatedTaskList.data.tasks);
   };
 
-  const removeTask = (taskId, id) => {
-    fetch(
-      `https://react-http-d03fd-default-rtdb.europe-west1.firebasedatabase.app/tasksToDo/${taskId}.json`,
-      {
-        method: "DELETE",
-      }
-    );
+  const removeTask = async (taskId, id) => {
+    await sendRequest({
+      url: `tasks/${id}`,
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${authCtx.token}`,
+      },
+    });
 
     setTasksToDo((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
@@ -44,6 +62,7 @@ export const TaskContextProvider = (props) => {
     setTasks,
     addTask,
     removeTask,
+    getUsersTasks,
   };
 
   return (

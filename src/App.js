@@ -12,23 +12,15 @@ function App() {
   const taskCtx = useContext(TaskContext);
   const authCtx = useContext(AuthContext);
   const { token } = authCtx;
+
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        "https://react-http-d03fd-default-rtdb.europe-west1.firebasedatabase.app/tasksToDo.json"
-      );
+    const getTasks = async () => {
+      const taskList = await taskCtx.getUsersTasks();
 
-      if (!response.ok) throw new Error("Could not fetch data.");
-
-      const responseData = await response.json();
-
-      const usersTasks = [];
-
-      taskCtx.setTasks(usersTasks);
+      taskCtx.setTasks(taskList.data.tasks);
     };
-
-    fetchData();
-  }, []);
+    getTasks();
+  }, [taskCtx.getUsersTasks]);
 
   return (
     <Layout>

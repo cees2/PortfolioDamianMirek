@@ -18,27 +18,29 @@ const SortTasks = (props) => {
   const tasks = taskCtx.tasks;
 
   const sortByAlphabet = () => {
-    const tasksName = tasks.map((task) => task.task).sort();
+    const tasksName = tasks.map((task) => task.taskDescription).sort();
 
     if (!arrowPosition) tasksName.reverse();
 
     return tasksName.flatMap((task) => {
       const curTask = task;
-      return tasks.filter((task) => task.task === curTask);
+      return tasks.filter((task) => task.taskDescription === curTask);
     });
   };
 
   const sortByDate = () =>
-    taskCtx.tasks
-      .map((task) => new Date(task.date).getTime())
+    taskCtx.tasks // do poprawy --> sprobowac czy zadziala samo tasks
+      .map((task) => new Date(task.dateCreated).getTime())
       .sort((curElement, nextElement) => {
         return !arrowPosition
           ? nextElement - curElement
           : curElement - nextElement;
       })
-      .flatMap((date) =>
-        tasks.filter((task) => new Date(task.date).getTime() === date)
-      );
+      .flatMap((date) => {
+        return tasks.filter(
+          (task) => new Date(task.dateCreated).getTime() === date
+        );
+      });
 
   const sortByPriority = () => {
     return tasks
@@ -55,11 +57,11 @@ const SortTasks = (props) => {
       )
       .map((task) => {
         return {
-          date: task.date,
+          dateCreated: task.dateCreated,
           id: task.id,
           priority: task.priority,
           userId: task.userId,
-          task: task.task,
+          taskDescription: task.taskDescription,
         };
       });
   };
@@ -67,7 +69,7 @@ const SortTasks = (props) => {
   const executeSorting = useCallback(
     (sortDecision) => {
       if (sortDecision === "alphabet") {
-        props.onTasksSorted(sortByAlphabet());
+        props.onTasksSorted(sortByAlphabet()); // do poprawy, tutaj ma byc taskCtx.setTask()
       } else if (sortDecision === "priority") {
         props.onTasksSorted(sortByPriority());
       } else if (sortDecision === "date") {
@@ -102,11 +104,14 @@ const SortTasks = (props) => {
     const searchInputRef = searchTaskRef.current.value;
 
     props.onSearchingTasks(
-      taskCtx.tasks.filter((task) =>
-        task.task
-          .toUpperCase()
-          .trim()
-          .includes(searchInputRef.toUpperCase().trim())
+      taskCtx.tasks.filter(
+        (
+          task // do poprawy tasks.
+        ) =>
+          task.taskDescription
+            .toUpperCase()
+            .trim()
+            .includes(searchInputRef.toUpperCase().trim())
       )
     );
   };

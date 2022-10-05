@@ -25,9 +25,13 @@ const LoginForm = (props) => {
       password: passwordInputRef.current.value,
     };
 
-    const user = await formSubmitHandler(e, payload);
+    const {
+      data: {
+        user: { tasks },
+      },
+    } = await formSubmitHandler(e, payload);
 
-    taskCtx.setTasks(user.data.user.tasks); // do poprawy
+    taskCtx.setTasks(tasks);
   };
 
   return (

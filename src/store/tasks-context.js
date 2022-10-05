@@ -14,16 +14,15 @@ export const TaskContextProvider = (props) => {
   const { sendRequest } = useHttp();
   const authCtx = useContext(AuthContext);
 
-  const getUsersTasks = useCallback(
-    async () =>
-      await sendRequest({
-        url: "users/getMyTasks",
-        headers: {
-          Authorization: `Bearer ${authCtx.token}`,
-        },
-      }),
-    [authCtx.token, sendRequest]
-  );
+  const getUsersTasks = useCallback(async () => {
+    const updatedTaskList = await sendRequest({
+      url: "users/getMyTasks",
+      headers: {
+        Authorization: `Bearer ${authCtx.token}`,
+      },
+    });
+    setTasksToDo(updatedTaskList.data.tasks);
+  }, [authCtx.token, sendRequest]);
 
   const addTask = async (taskToAdd) => {
     await sendRequest({
@@ -36,21 +35,19 @@ export const TaskContextProvider = (props) => {
       },
     });
 
-    const updatedTaskList = await getUsersTasks();
-
-    setTasksToDo(updatedTaskList.data.tasks);
+    await getUsersTasks();
   };
 
-  const removeTask = async (taskId, id) => {
+  const removeTask = async (taskId) => {
     await sendRequest({
-      url: `tasks/${id}`,
+      url: `tasks/${taskId}`,
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${authCtx.token}`,
       },
     });
 
-    setTasksToDo((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    await getUsersTasks();
   };
 
   const setTasks = (tasks) => {

@@ -91,7 +91,7 @@ const MainHeader = () => {
             to="/home"
             onClick={authCtx.logout}
           >
-            <img src={require(`../../pictures/logout.png`)} alt="log in" />
+            <img src={require(`../../pictures/logout.png`)} alt="log out" />
             <h6 className={classes.listItemText}>Log out</h6>
           </NavLink>
         </li>

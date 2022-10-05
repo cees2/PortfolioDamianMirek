@@ -11,6 +11,7 @@ const useHttp = () => {
         headers: fetchOptions.headers ? fetchOptions.headers : null,
       });
 
+      if (response.status === 204) return;
       const data = await response.json();
 
       if (!response.ok) {

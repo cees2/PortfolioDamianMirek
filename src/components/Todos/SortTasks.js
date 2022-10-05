@@ -29,7 +29,7 @@ const SortTasks = (props) => {
   };
 
   const sortByDate = () =>
-    taskCtx.tasks // do poprawy --> sprobowac czy zadziala samo tasks
+    tasks
       .map((task) => new Date(task.dateCreated).getTime())
       .sort((curElement, nextElement) => {
         return !arrowPosition
@@ -69,11 +69,11 @@ const SortTasks = (props) => {
   const executeSorting = useCallback(
     (sortDecision) => {
       if (sortDecision === "alphabet") {
-        props.onTasksSorted(sortByAlphabet()); // do poprawy, tutaj ma byc taskCtx.setTask()
+        taskCtx.setTasks(sortByAlphabet());
       } else if (sortDecision === "priority") {
-        props.onTasksSorted(sortByPriority());
+        taskCtx.setTasks(sortByPriority());
       } else if (sortDecision === "date") {
-        props.onTasksSorted(sortByDate());
+        taskCtx.setTasks(sortByDate());
       }
     },
     [arrowPosition]
@@ -104,14 +104,11 @@ const SortTasks = (props) => {
     const searchInputRef = searchTaskRef.current.value;
 
     props.onSearchingTasks(
-      taskCtx.tasks.filter(
-        (
-          task // do poprawy tasks.
-        ) =>
-          task.taskDescription
-            .toUpperCase()
-            .trim()
-            .includes(searchInputRef.toUpperCase().trim())
+      tasks.filter((task) =>
+        task.taskDescription
+          .toUpperCase()
+          .trim()
+          .includes(searchInputRef.toUpperCase().trim())
       )
     );
   };

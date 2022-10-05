@@ -10,25 +10,23 @@ const ToDoList = () => {
   const taskCtx = useContext(TaskContext);
   const [modalIsClosed, setModalIsClosed] = useState(true);
   const [tasksToRender, setTasksToRender] = useState(taskCtx.tasks);
-  console.log("exec");
+  const [itemToBeDeleted, setItemToBeDeleted] = useState("");
 
   useEffect(() => {
     setTasksToRender(taskCtx.tasks);
   }, [taskCtx.tasks]);
-
-  const sortTasks = (sortedTasks) => {
-    taskCtx.setTasks(sortedTasks); // do poprawy !!!!!
-  };
 
   const hideModal = () => {
     setModalIsClosed(true);
   };
 
   const showModal = (itemId) => {
+    setItemToBeDeleted(itemId);
     setModalIsClosed(false);
   };
 
   const deleteTaskHandler = () => {
+    taskCtx.removeTask(itemToBeDeleted);
     setModalIsClosed(true);
   };
 
@@ -68,10 +66,7 @@ const ToDoList = () => {
           document.getElementById("confirmation-modal")
         )}
       {taskCtx.tasks.length && (
-        <SortTasks
-          onTasksSorted={sortTasks}
-          onSearchingTasks={searchingTaskHandler}
-        />
+        <SortTasks onSearchingTasks={searchingTaskHandler} />
       )}
       <div className={classes.listWrapper}>
         <ul className={classes.taskList}>{content}</ul>

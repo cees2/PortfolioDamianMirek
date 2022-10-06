@@ -17,7 +17,7 @@ function App() {
     const getTasks = async () => {
       const taskList = await taskCtx.getUsersTasks();
 
-      if (!taskList.data) return;
+      if (!taskList) return;
       taskCtx.setTasks(taskList.data.tasks);
     };
     getTasks();

@@ -1,7 +1,7 @@
 import classes from "./ConfirmationModal.module.css";
 import React from "react";
 
-const Backdrop = (props) => {
+export const Backdrop = (props) => {
   return (
     <div className={classes.backdrop} onClick={props.onReject}>
       {props.children}

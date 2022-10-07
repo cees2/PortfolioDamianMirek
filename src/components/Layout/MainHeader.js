@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import TaskContext from "../../store/tasks-context";
 import AuthContext from "../../store/auth-context";
 import { useMediaQuery } from "react-responsive";
+import DropDownMenu from "./DropDownMenu";
 
 const MainHeader = () => {
   const [isHamburgerActive, setIsHamburgerActive] = useState(0); // 0--> hidden, 1--> active
@@ -86,14 +87,15 @@ const MainHeader = () => {
       )}
       {authCtx.token && (
         <li>
-          <NavLink
+          <DropDownMenu />
+          {/* <NavLink
             activeClassName={classes.active}
             to="/home"
             onClick={authCtx.logout}
           >
             <img src={require(`../../pictures/logout.png`)} alt="log out" />
-            <h6 className={classes.listItemText}>Log out</h6>
-          </NavLink>
+            <h6 className={classes.listItemText}>{authCtx.userName}</h6>
+          </NavLink> */}
         </li>
       )}
     </ul>

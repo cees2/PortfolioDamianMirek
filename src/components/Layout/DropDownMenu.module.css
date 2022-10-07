@@ -1,0 +1,68 @@
+.profileDetailsTrigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+}
+
+.profileDetailsTrigger img {
+  width: 25px;
+  height: 25px;
+  align-self: center;
+  margin-left: 5px;
+}
+
+ul.dropDownList {
+  display: none;
+  position: absolute;
+  list-style-type: none;
+  background-color: #589a8d;
+  border-radius: 6px;
+  width: 100%;
+  top: 2.5rem;
+}
+
+ul.activeDropDownList {
+  display: flex;
+  flex-direction: column;
+}
+
+.listItemText {
+  font-weight: normal;
+  font-size: 24px;
+}
+
+.profileDetailsTrigger:hover {
+  cursor: pointer;
+  color: rgb(200, 205, 213);
+}
+
+li.dropDownItem a:hover,
+li.dropDownItem:hover {
+  background-color: #4a8277;
+}
+
+li.dropDownItem a,
+li.dropDownItem {
+  color: #fff;
+  font-weight: 800;
+  width: 100%;
+}
+
+li.dropDownItem a {
+  margin: 0;
+  display: block;
+}
+
+li.dropDownItem {
+  font-size: 18px;
+  border-bottom: 1px solid white;
+  width: 100%;
+  margin: 0;
+  padding: 1rem 0.5rem;
+}
+
+li.dropDownItem:last-child {
+  margin-bottom: 6px;
+  border: none;
+}

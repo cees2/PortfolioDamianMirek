@@ -17,7 +17,7 @@ function App() {
     const getTasks = async () => {
       const taskList = await taskCtx.getUsersTasks();
 
-      if (!taskList.data) return;
+      if (!taskList) return;
       taskCtx.setTasks(taskList.data.tasks);
     };
     getTasks();
@@ -37,11 +37,9 @@ function App() {
             <Tasks />
           </Route>
         )}
-        {!token && (
-          <Route path="/authentication">
-            <Authentication />
-          </Route>
-        )}
+        <Route path="/authentication">
+          <Authentication />
+        </Route>
         {token && (
           <Route path="/quiz">
             <Quiz />

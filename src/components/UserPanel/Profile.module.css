@@ -1,0 +1,35 @@
+.profileWrapper {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  background-color: #60bf81;
+}
+
+.profileHeader h3 {
+  text-align: center;
+  padding: 1rem 0;
+  letter-spacing: 1px;
+}
+
+.profileDetail {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  padding: 0.5rem 2rem;
+  border-bottom: 1px solid white;
+}
+
+.profileDetail:last-child {
+  padding-bottom: 1rem;
+  border: none;
+}
+
+.profileDetail h4 {
+  font-size: 20px;
+}
+
+.profileDetail p {
+  font-weight: 500;
+}

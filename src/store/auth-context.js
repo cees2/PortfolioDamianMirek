@@ -3,6 +3,7 @@ import useHttp from "../hooks/use-http";
 
 const AuthContext = createContext({
   token: "",
+  userName: "",
   login: (data) => {},
   logout: () => {},
   createAccount: () => {},
@@ -14,16 +15,26 @@ export const AuthContextProvider = (props) => {
   const tokenInitialValue = localStorage.getItem("token")
     ? localStorage.getItem("token")
     : null;
+
+  const userNameInitialValue = localStorage.getItem("userName")
+    ? localStorage.getItem("userName")
+    : null;
+
   const [token, setToken] = useState(tokenInitialValue);
+  const [userName, setUserName] = useState(userNameInitialValue);
 
   const manageLocalStorage = (data) => {
+    console.log(data);
     setToken((prevToken) => (prevToken = data?.token ?? ""));
+    setUserName((prevUser) => (prevUser = data?.data.user.name ?? ""));
 
     if (data) {
       localStorage.setItem("token", data.token);
+      localStorage.setItem("userName", data.data.user.name);
       return;
     }
     localStorage.removeItem("token");
+    localStorage.removeItem("userName");
   };
 
   const login = async (inputData) => {
@@ -69,6 +80,7 @@ export const AuthContextProvider = (props) => {
 
   const authObject = {
     token,
+    userName,
     login,
     logout,
     createAccount,

@@ -37,11 +37,9 @@ function App() {
             <Tasks />
           </Route>
         )}
-        {!token && (
-          <Route path="/authentication">
-            <Authentication />
-          </Route>
-        )}
+        <Route path="/authentication">
+          <Authentication />
+        </Route>
         {token && (
           <Route path="/quiz">
             <Quiz />

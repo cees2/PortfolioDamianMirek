@@ -1,0 +1,71 @@
+.passwordModalWrapper {
+  position: fixed;
+  z-index: 31;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 6px;
+  background-color: rgb(132, 0, 0);
+  min-width: 50%;
+  color: white;
+  padding: 2rem;
+}
+
+header.passwordModalHeader {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0 2rem;
+}
+
+main.passwordModalMain {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.modalInput label {
+  display: block;
+  margin: 6px 0;
+}
+
+.modalInput input {
+  width: 100%;
+  border: none;
+  outline: none;
+  height: 2rem;
+  border-radius: 6px;
+  padding-left: 6px;
+}
+
+.passwordModalFooter {
+  margin: 1rem auto 0;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.passwordModalFooter button {
+  padding: 5px 20px;
+  border-radius: 4px;
+  border: none;
+  color: white;
+}
+
+.passwordModalFooter button:hover {
+  cursor: pointer;
+}
+
+.cancelButton {
+  background-color: rgb(51, 217, 0);
+}
+
+.cancelButton:hover {
+  background-color: rgb(60, 255, 0);
+}
+
+.confirmButton {
+  background-color: rgb(255, 0, 0);
+}
+
+.confirmButton:hover {
+  background-color: rgb(205, 0, 0);
+}

@@ -13,7 +13,7 @@ const Home = () => {
         </section>
         <aside className={classes.aboutMe}>
           <div className={classes.info}>
-            <h3>Damian Mirek, 3rd year student</h3>
+            <h3>Damian Mirek, 4th year student</h3>
             <p className={classes.description}>
               Hi there, I'm looking for an internship as a frontend developer
               and this is my portfolio. I'm interested in JavaScript and

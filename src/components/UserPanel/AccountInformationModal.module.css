@@ -13,8 +13,12 @@
 
 header.passwordModalHeader {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin: 1rem 0 2rem;
+}
+
+header.passwordModalHeader img {
+  margin-right: 2rem;
 }
 
 main.passwordModalMain {

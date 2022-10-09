@@ -58,9 +58,9 @@ const SortTasks = (props) => {
       .map((task) => {
         return {
           dateCreated: task.dateCreated,
-          id: task.id,
+          _id: task._id,
           priority: task.priority,
-          userId: task.userId,
+          userId: task._id,
           taskDescription: task.taskDescription,
         };
       });

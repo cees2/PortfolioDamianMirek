@@ -20,7 +20,8 @@ function App() {
       if (!taskList) return;
       taskCtx.setTasks(taskList.data.tasks);
     };
-    getTasks();
+
+    if (authCtx.token) getTasks();
   }, [taskCtx.getUsersTasks]);
 
   return (

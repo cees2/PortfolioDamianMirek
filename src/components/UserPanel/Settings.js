@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import Card from "../UI/Card";
 import classes from "./Settings.module.css";
 import AuthContext from "../../store/auth-context";
@@ -9,6 +9,7 @@ import useHttp from "../../hooks/use-http";
 const Settings = () => {
   const [modalIsClosed, setModalIsClosed] = useState(true);
   const [modalDetails, setModalDetails] = useState(""); // email / password / account
+  const nameInputRef = useRef();
   const { sendRequest } = useHttp();
 
   const authCtx = useContext(AuthContext);
@@ -35,20 +36,26 @@ const Settings = () => {
     setModalIsClosed(true);
   };
 
-  const modalAccepted = async (payload) => {
-    try {
-      sendRequest({
-        url: `users/changeMyPassword`,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authCtx.token}`,
-        },
-        body: payload,
-        method: "PATCH",
-      }); // do poprawy
-    } catch (err) {}
-
+  const modalAccepted = async () => {
     setModalIsClosed(true);
+  };
+
+  const changeNameHandler = async () => {
+    const name = nameInputRef.current.value;
+
+    const updatedUser = await sendRequest({
+      url: "users/changeMyName",
+      method: "PATCH",
+      body: { newName: name },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authCtx.token}`,
+      },
+    });
+
+    authCtx.changeUserName(updatedUser.data.user.name);
+
+    nameInputRef.current.value = "";
   };
 
   return (
@@ -69,8 +76,18 @@ const Settings = () => {
         <section className={classes.safeChangesArea}>
           <div className={classes.settingsInput}>
             <label htmlFor="name">Name</label>
-            <input id="name" name="name" placeholder={authCtx.userName} />
-            <button className={classes.changeNameButton}>Change Name</button>
+            <input
+              id="name"
+              name="name"
+              placeholder={authCtx.userDetails.name}
+              ref={nameInputRef}
+            />
+            <button
+              className={classes.changeNameButton}
+              onClick={changeNameHandler}
+            >
+              Change Name
+            </button>
           </div>
         </section>
         <section className={classes.dangerZone}>

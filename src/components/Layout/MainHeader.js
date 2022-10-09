@@ -88,14 +88,6 @@ const MainHeader = () => {
       {authCtx.token && (
         <li>
           <DropDownMenu />
-          {/* <NavLink
-            activeClassName={classes.active}
-            to="/home"
-            onClick={authCtx.logout}
-          >
-            <img src={require(`../../pictures/logout.png`)} alt="log out" />
-            <h6 className={classes.listItemText}>{authCtx.userName}</h6>
-          </NavLink> */}
         </li>
       )}
     </ul>

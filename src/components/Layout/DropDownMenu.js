@@ -15,7 +15,7 @@ const DropDownMenu = () => {
 
   return (
     <div className={classes.profileDetailsTrigger} onClick={toggleDropDown}>
-      <h6 className={classes.listItemText}>{authCtx.userName}</h6>
+      <h6 className={classes.listItemText}>{authCtx.userDetails.name}</h6>
       <img
         src={require(`../../pictures/profile_triangle.png`)}
         alt="Profile triangle"

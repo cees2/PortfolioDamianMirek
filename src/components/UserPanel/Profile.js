@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from "../UI/Card";
 import classes from "./Profile.module.css";
+import AuthContext from "../../store/auth-context";
 
 const Profile = () => {
+  const authCtx = useContext(AuthContext);
   return (
     <Card class={classes.profileWrapper}>
       <header className={classes.profileHeader}>
@@ -11,23 +13,19 @@ const Profile = () => {
       <section>
         <div className={classes.profileDetail}>
           <h4>Name</h4>
-          <p>Damian</p>
+          <p>{authCtx.userDetails.name}</p>
         </div>
         <div className={classes.profileDetail}>
           <h4>Email</h4>
-          <p>kdosad@okdsaosa.das</p>
+          <p>{authCtx.userDetails.email}</p>
         </div>
         <div className={classes.profileDetail}>
           <h4>Date created</h4>
-          <p>01.02.1999</p>
+          <p>{authCtx.userDetails.dateCreated}</p>
         </div>
         <div className={classes.profileDetail}>
           <h4>User role</h4>
-          <p>User</p>
-        </div>
-        <div className={classes.profileDetail}>
-          <h4>Number of tasks to do</h4>
-          <p></p>
+          <p>{authCtx.userDetails.role}</p>
         </div>
       </section>
     </Card>

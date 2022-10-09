@@ -2,39 +2,47 @@ import { createContext, useState } from "react";
 import useHttp from "../hooks/use-http";
 
 const AuthContext = createContext({
-  token: "",
-  userName: "",
+  token: null,
+  userDetails: null,
   login: (data) => {},
   logout: () => {},
   createAccount: () => {},
 });
 
 export const AuthContextProvider = (props) => {
-  const { sendRequest } = useHttp();
-
   const tokenInitialValue = localStorage.getItem("token")
     ? localStorage.getItem("token")
     : null;
 
-  const userNameInitialValue = localStorage.getItem("userName")
-    ? localStorage.getItem("userName")
+  const userDetailsInitialValue = localStorage.getItem("userDetails")
+    ? JSON.parse(localStorage.getItem("userDetails"))
     : null;
 
   const [token, setToken] = useState(tokenInitialValue);
-  const [userName, setUserName] = useState(userNameInitialValue);
+  const [userDetails, setUserDetails] = useState(userDetailsInitialValue);
+  const { sendRequest } = useHttp();
 
-  const manageLocalStorage = (data) => {
-    console.log(data);
-    setToken((prevToken) => (prevToken = data?.token ?? ""));
-    setUserName((prevUser) => (prevUser = data?.data.user.name ?? ""));
-
+  const manageLocalStorage = (data = "") => {
     if (data) {
+      const { user } = data.data;
+      const now = new Date(user.dateCreated);
+      const formatedDate = new Intl.DateTimeFormat("pl-PL").format(now);
+      const newUserValues = {
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        dateCreated: formatedDate,
+      };
+      setToken((prevToken) => (prevToken = data.token));
+      setUserDetails((prevUser) => (prevUser = newUserValues));
       localStorage.setItem("token", data.token);
-      localStorage.setItem("userName", data.data.user.name);
+      localStorage.setItem("userDetails", JSON.stringify(newUserValues));
       return;
     }
+    setToken(null);
+    setUserDetails(null);
     localStorage.removeItem("token");
-    localStorage.removeItem("userName");
+    localStorage.removeItem("userDetails");
   };
 
   const login = async (inputData) => {
@@ -48,7 +56,6 @@ export const AuthContextProvider = (props) => {
           withCredentials: true,
         },
       });
-
       manageLocalStorage(data);
       return data;
     } catch (err) {
@@ -78,12 +85,17 @@ export const AuthContextProvider = (props) => {
     manageLocalStorage();
   };
 
+  const changeUserDetails = (newUserDetails) => {
+    setUserDetails(newUserDetails);
+  };
+
   const authObject = {
     token,
-    userName,
+    userDetails,
     login,
     logout,
     createAccount,
+    changeUserDetails,
   };
 
   return (

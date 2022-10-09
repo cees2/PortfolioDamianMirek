@@ -17,19 +17,29 @@ const AccountInformationModal = (props) => {
     props.onReject();
   };
 
-  const resetPassword = async () => {
-    const oldPassword = passwordInputRef.current.value;
-    const newPassword = accountDetailToBeChanged.current.value;
-    const passwordConfirm = confirmDetailToBeChanged.current.value;
+  const changeAccountDetail = async (detail = "email") => {
+    const password = passwordInputRef.current.value;
+    const newDetail = accountDetailToBeChanged.current.value;
+    const confirmNewDetail = confirmDetailToBeChanged.current.value;
+    let url;
+
     const payload = {
-      oldPassword,
-      newPassword,
-      passwordConfirm,
-      action: props.payload.action,
+      password,
     };
+
+    if (detail === "email") {
+      payload.newEmail = newDetail;
+      payload.emailConfirm = confirmNewDetail;
+      url = "changeMyEmail";
+    } else {
+      payload.newPassword = newDetail;
+      payload.passwordConfirm = confirmNewDetail;
+      url = "changeMyPassword";
+    }
+
     try {
       await sendRequest({
-        url: `users/changeMyPassword`,
+        url: `users/${url}`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${authCtx.token}`,
@@ -44,31 +54,12 @@ const AccountInformationModal = (props) => {
     }
   };
 
-  const resetEmail = async () => {
-    const oldPassword = passwordInputRef.current.value;
-    const newEmail = accountDetailToBeChanged.current.value;
-    const emailConfirm = confirmDetailToBeChanged.current.value;
-    const payload = {
-      password: oldPassword,
-      newEmail,
-      emailConfirm,
-      action: props.payload.action, // do poprawy?
-    };
-    try {
-      await sendRequest({
-        url: `users/changeMyEmail`,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authCtx.token}`,
-        },
-        body: payload,
-        method: "PATCH",
-      });
+  const resetPassword = async () => {
+    changeAccountDetail("password");
+  };
 
-      authCtx.logout();
-    } catch (err) {
-      setError(err.message);
-    }
+  const resetEmail = async () => {
+    changeAccountDetail();
   };
 
   const deleteAccount = async () => {

@@ -94,7 +94,7 @@ const MainHeader = () => {
   );
 
   return (
-    <header className={classes.header}>
+    <header className={classes.header} onClick={authCtx.hideDropDown}>
       <div className={classes.portfolio}>
         <Link to="/home">Portfolio</Link>
       </div>

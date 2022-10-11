@@ -10,6 +10,11 @@
   height: 25px;
   align-self: center;
   margin-left: 5px;
+  transition: 0.2s ease;
+}
+
+.imgDropDownActive {
+  transform: rotate(90deg);
 }
 
 ul.dropDownList {
@@ -37,6 +42,17 @@ ul.activeDropDownList {
   color: rgb(200, 205, 213);
 }
 
+li.dropDownItem {
+  font-size: 18px;
+  border-bottom: 1px solid white;
+  width: 100%;
+  margin: 0;
+  padding: 1rem 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 li.dropDownItem a:hover,
 li.dropDownItem:hover {
   background-color: #4a8277;
@@ -46,7 +62,6 @@ li.dropDownItem a,
 li.dropDownItem {
   color: #fff;
   font-weight: 800;
-  width: 100%;
 }
 
 li.dropDownItem a {
@@ -54,15 +69,13 @@ li.dropDownItem a {
   display: block;
 }
 
-li.dropDownItem {
-  font-size: 18px;
-  border-bottom: 1px solid white;
-  width: 100%;
-  margin: 0;
-  padding: 1rem 0.5rem;
-}
-
 li.dropDownItem:last-child {
   margin-bottom: 6px;
   border: none;
+}
+
+li.dropDownItem img {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
 }

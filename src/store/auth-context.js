@@ -4,6 +4,7 @@ import useHttp from "../hooks/use-http";
 const AuthContext = createContext({
   token: null,
   userDetails: null,
+  dropDownIsVisible: false,
   login: (data) => {},
   logout: () => {},
   createAccount: () => {},
@@ -20,7 +21,12 @@ export const AuthContextProvider = (props) => {
 
   const [token, setToken] = useState(tokenInitialValue);
   const [userDetails, setUserDetails] = useState(userDetailsInitialValue);
+  const [dropDownIsVisible, setDropDownIsVisible] = useState(false);
   const { sendRequest } = useHttp();
+
+  const hideDropDown = () => {
+    if (dropDownIsVisible) setDropDownIsVisible(false);
+  };
 
   const manageLocalStorage = (data = "") => {
     if (data) {
@@ -92,10 +98,12 @@ export const AuthContextProvider = (props) => {
   const authObject = {
     token,
     userDetails,
+    dropDownIsVisible,
     login,
     logout,
     createAccount,
     changeUserDetails,
+    hideDropDown,
   };
 
   return (

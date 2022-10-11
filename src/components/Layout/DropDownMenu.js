@@ -24,20 +24,30 @@ const DropDownMenu = () => {
       />
       <ul className={dropDownListClasses}>
         <li className={classes.dropDownItem}>
-          <img src={require("../../pictures/profile.png")} alt="User profile" />
-          <Link to="/authentication/accountDetails">Profile</Link>
+          <Link to="/authentication/accountDetails">
+            <img
+              src={require("../../pictures/profile.png")}
+              alt="User profile"
+            />
+            <h4>Profile</h4>
+          </Link>
         </li>
         <li className={classes.dropDownItem}>
-          <img
-            src={require("../../pictures/settings.png")}
-            alt="Profile settings"
-          />
-          <Link to="/authentication/settings">Settings</Link>
+          <Link to="/authentication/settings">
+            <img
+              src={require("../../pictures/settings.png")}
+              alt="Profile settings"
+            />
+            <h4>Settings</h4>
+          </Link>
         </li>
         <li className={classes.dropDownItem}>
-          <img src={require("../../pictures/logout.png")} alt="Logout user" />
           <Link to="/home" onClick={authCtx.logout}>
-            Log out
+            <img
+              src={require("../../pictures/logout_white.png")}
+              alt="Logout user"
+            />
+            <h4>Log out</h4>
           </Link>
         </li>
       </ul>

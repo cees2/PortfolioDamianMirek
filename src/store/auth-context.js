@@ -28,6 +28,10 @@ export const AuthContextProvider = (props) => {
     if (dropDownIsVisible) setDropDownIsVisible(false);
   };
 
+  const toggleDropDown = () => {
+    setDropDownIsVisible((prevVal) => !prevVal);
+  };
+
   const manageLocalStorage = (data = "") => {
     if (data) {
       const { user } = data.data;
@@ -104,6 +108,7 @@ export const AuthContextProvider = (props) => {
     createAccount,
     changeUserDetails,
     hideDropDown,
+    toggleDropDown,
   };
 
   return (

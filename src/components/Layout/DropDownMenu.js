@@ -1,25 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import classes from "./DropDownMenu.module.css";
 import AuthContext from "../../store/auth-context";
 
 const DropDownMenu = () => {
   const authCtx = useContext(AuthContext);
-  const [dropDownIsVisible, setDropDownIsVisible] = useState(false);
 
   const toggleDropDown = (e) => {
-    console.log("exec");
     e.stopPropagation();
-    setDropDownIsVisible((prevVal) => !prevVal);
+    authCtx.toggleDropDown();
   };
 
-  const dropDownListClasses = dropDownIsVisible
+  const dropDownListClasses = authCtx.dropDownIsVisible
     ? `${classes.dropDownList} ${classes.activeDropDownList}`
     : `${classes.dropDownList}`;
-
-  const imgDropDownClass = dropDownIsVisible
-    ? ``
-    : `${classes.imgDropDownActive}`;
 
   return (
     <div className={classes.profileDetailsTrigger} onClick={toggleDropDown}>
@@ -27,7 +21,6 @@ const DropDownMenu = () => {
       <img
         src={require(`../../pictures/profile_triangle.png`)}
         alt="Profile triangle"
-        className={imgDropDownClass}
       />
       <ul className={dropDownListClasses}>
         <li className={classes.dropDownItem}>

@@ -37,6 +37,10 @@ ul.activeDropDownList {
   font-size: 24px;
 }
 
+.dropDownItem h6.listItemText {
+  font-size: 18px;
+}
+
 .profileDetailsTrigger:hover {
   cursor: pointer;
   color: rgb(200, 205, 213);
@@ -80,7 +84,7 @@ li.dropDownItem a img {
   height: 20px;
 }
 
-li.dropDownItem a h4 {
+li.dropDownItem a h6.listItemText {
   flex-grow: 1;
   margin: 0.5rem 0 0.5rem 1rem;
 }
@@ -105,7 +109,7 @@ li.dropDownItem a h4 {
 }
 
 @media (max-width: 951px) {
-  .dropDownItem a h4 {
+  .dropDownItem a h6.listItemText {
     font-size: 14px;
   }
 

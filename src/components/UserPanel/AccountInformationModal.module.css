@@ -1,4 +1,4 @@
-.passwordModalWrapper {
+.accountModalWrapper {
   position: fixed;
   z-index: 31;
   top: 50%;
@@ -11,17 +11,18 @@
   padding: 2rem;
 }
 
-header.passwordModalHeader {
+header.accountModalHeader {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 1rem 0 2rem;
 }
 
-header.passwordModalHeader img {
+header.accountModalHeader img {
   margin-right: 2rem;
 }
 
-main.passwordModalMain {
+main.accountModalMain {
   width: 50%;
   margin: 0 auto;
 }
@@ -40,21 +41,21 @@ main.passwordModalMain {
   padding-left: 6px;
 }
 
-.passwordModalFooter {
+.accountModalFooter {
   margin: 1rem auto 0;
   width: 50%;
   display: flex;
   justify-content: space-between;
 }
 
-.passwordModalFooter button {
+.accountModalFooter button {
   padding: 5px 20px;
   border-radius: 4px;
   border: none;
   color: white;
 }
 
-.passwordModalFooter button:hover {
+.accountModalFooter button:hover {
   cursor: pointer;
 }
 
@@ -72,4 +73,58 @@ main.passwordModalMain {
 
 .confirmButton:hover {
   background-color: rgb(205, 0, 0);
+}
+
+@media (max-width: 1000px) {
+  .accountModalWrapper {
+    width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .accountModalHeader h2 {
+    font-size: 18px;
+  }
+
+  header.accountModalHeader img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .modalInput label {
+    margin: 6px 0;
+    font-size: 14px;
+  }
+
+  main.accountModalMain {
+    width: 80%;
+  }
+
+  .modalInput input {
+    height: 1.5rem;
+  }
+
+  footer.accountModalFooter {
+    width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .accountModalHeader h2 {
+    font-size: 14px;
+  }
+
+  header.accountModalHeader img {
+    width: 30px;
+    height: 30px;
+    margin-right: 1rem;
+  }
+
+  .accountModalHeader {
+    justify-content: space-between;
+  }
+
+  .accountModalWrapper {
+    padding: 2rem 1rem;
+  }
 }

@@ -97,12 +97,12 @@ const AccountInformationModal = (props) => {
   return (
     <>
       <Backdrop onReject={rejectModal} />
-      <div className={classes.passwordModalWrapper}>
-        <header className={classes.passwordModalHeader}>
+      <div className={classes.accountModalWrapper}>
+        <header className={classes.accountModalHeader}>
           <img src={require("../../pictures/warning.png")} alt="Warning" />
           <h2>{warning} </h2>
         </header>
-        <main className={classes.passwordModalMain}>
+        <main className={classes.accountModalMain}>
           <div className={classes.modalInput}>
             <label htmlFor="curPass">Current password</label>
             <input
@@ -136,7 +136,7 @@ const AccountInformationModal = (props) => {
           )}
           {error && <Error errorMessage={error} />}
         </main>
-        <footer className={classes.passwordModalFooter}>
+        <footer className={classes.accountModalFooter}>
           <button className={classes.cancelButton} onClick={rejectModal}>
             Cancel
           </button>

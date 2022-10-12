@@ -99,6 +99,24 @@
     width: 75%;
     margin-top: 10vh;
   }
+
+  button.startQuizButton {
+    padding: 10px 15px;
+    display: block;
+  }
+
+  h3.quizDifficultyHeader {
+    font-size: 16px;
+  }
+
+  .startQuizWrapper {
+    flex-direction: column;
+  }
+
+  .quizDifficulty {
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
 }
 
 @media (min-width: 480px) and (max-width: 1000px) {

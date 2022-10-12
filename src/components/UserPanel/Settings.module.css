@@ -84,3 +84,9 @@ section {
   color: white;
   font-weight: 600;
 }
+
+@media (max-width: 768px) {
+  .settingsWrapper {
+    width: 90%;
+  }
+}

@@ -33,3 +33,13 @@
 .profileDetail p {
   font-weight: 500;
 }
+
+@media (max-width: 768px) {
+  .profileWrapper {
+    width: 90%;
+  }
+
+  .profileDetail {
+    padding: 1rem 0 0;
+  }
+}

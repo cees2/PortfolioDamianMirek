@@ -76,9 +76,41 @@ li.dropDownItem:last-child {
 
 li.dropDownItem a img {
   display: block;
+  width: 20px;
+  height: 20px;
 }
 
 li.dropDownItem a h4 {
   flex-grow: 1;
-  margin: 0.5rem 0 0.5rem 0.5rem;
+  margin: 0.5rem 0 0.5rem 1rem;
+}
+
+@media (min-width: 831px) and (max-width: 950px) {
+  .listItemText {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 830px) {
+  .listItemText {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  ul.dropDownList {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 951px) {
+  .dropDownItem a h4 {
+    font-size: 14px;
+  }
+
+  .dropDownItem a img {
+    width: 15px;
+    height: 15px;
+  }
 }

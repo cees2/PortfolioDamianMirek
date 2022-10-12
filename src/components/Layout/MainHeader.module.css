@@ -21,6 +21,7 @@
   list-style-type: none;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   margin-right: 0.5rem;
   font-size: 1.5rem;
 }
@@ -104,33 +105,28 @@ nav {
     margin-right: 0;
     flex-direction: column;
     flex-basis: 15%;
+    align-items: stretch;
   }
 
   .headerList li a {
     margin: 0;
     width: 100%;
-    border-bottom: 1px solid white;
     color: white;
     font-weight: 800;
-    padding: 2rem;
+    padding: 1.5rem 0;
     display: flex;
+    border-bottom: 1px solid white;
     align-items: center;
-    justify-content: left;
   }
 
   .headerList li a img {
     height: 40px;
-    margin-right: 1rem;
+    margin-right: 2rem;
   }
+
   .numOfTasks {
     color: black;
     background-color: #fff;
-  }
-}
-
-@media (min-width: 480px) and (max-width: 768px) {
-  .headerList li a img {
-    margin-left: 35%;
   }
 }
 
@@ -160,12 +156,20 @@ nav {
   .header {
     padding: 2rem 1rem 2rem 2rem;
   }
+
+  .headerList li a h6 {
+    font-size: 18px;
+  }
 }
 
 @media (min-width: 831px) and (max-width: 950px) {
   .headerList li,
   .headerList li a {
     margin: 0 0.4rem;
+  }
+
+  .headerList li a h6 {
+    font-size: 20px;
   }
 }
 

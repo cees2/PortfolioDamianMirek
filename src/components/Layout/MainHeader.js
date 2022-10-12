@@ -85,11 +85,7 @@ const MainHeader = () => {
           </NavLink>
         </li>
       )}
-      {authCtx.token && (
-        <li>
-          <DropDownMenu />
-        </li>
-      )}
+      {authCtx.token && <DropDownMenu />}
     </ul>
   );
 

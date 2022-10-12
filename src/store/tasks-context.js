@@ -7,6 +7,7 @@ const TaskContext = createContext({
   setTasks: (tasks) => {},
   addTask: (task) => {},
   removeTask: (id) => {},
+  getUsersTasks: () => {},
 });
 
 export const TaskContextProvider = (props) => {

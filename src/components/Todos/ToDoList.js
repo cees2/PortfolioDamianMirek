@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
 import classes from "./ToDoList.module.css";
 import SingleToDo from "./SingleToDo";
@@ -30,9 +30,9 @@ const ToDoList = () => {
     setModalIsClosed(true);
   };
 
-  const searchingTaskHandler = (tasksToBeRendered) => {
+  const searchTaskHandler = useCallback((tasksToBeRendered) => {
     setTasksToRender(tasksToBeRendered);
-  };
+  }, []);
 
   const content =
     tasksToRender.length !== 0 ? (
@@ -66,7 +66,7 @@ const ToDoList = () => {
           document.getElementById("confirmation-modal")
         )}
       {taskCtx.tasks.length && (
-        <SortTasks onSearchingTasks={searchingTaskHandler} />
+        <SortTasks onSearchingTasks={searchTaskHandler} />
       )}
       <div className={classes.listWrapper}>
         <ul className={classes.taskList}>{content}</ul>

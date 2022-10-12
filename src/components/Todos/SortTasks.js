@@ -68,6 +68,7 @@ const SortTasks = (props) => {
 
   const executeSorting = useCallback(
     (sortDecision) => {
+      console.log("exec,", sortDecision);
       if (sortDecision === "alphabet") {
         taskCtx.setTasks(sortByAlphabet());
       } else if (sortDecision === "priority") {
@@ -167,4 +168,4 @@ const SortTasks = (props) => {
   );
 };
 
-export default SortTasks;
+export default React.memo(SortTasks);

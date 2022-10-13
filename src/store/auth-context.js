@@ -84,7 +84,6 @@ export const AuthContextProvider = (props) => {
           withCredentials: true,
         },
       });
-
       manageLocalStorage(data);
     } catch (err) {
       throw err;

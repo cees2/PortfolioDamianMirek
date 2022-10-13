@@ -23,8 +23,8 @@ ul.dropDownList {
   list-style-type: none;
   background-color: #589a8d;
   border-radius: 6px;
-  width: 100%;
   top: 2.5rem;
+  right: 0;
 }
 
 ul.activeDropDownList {
@@ -86,7 +86,7 @@ li.dropDownItem a img {
 
 li.dropDownItem a h6.listItemText {
   flex-grow: 1;
-  margin: 0.5rem 0 0.5rem 1rem;
+  margin: 0.5rem 0.5rem 0.5rem 1rem;
 }
 
 @media (min-width: 831px) and (max-width: 950px) {

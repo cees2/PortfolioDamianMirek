@@ -44,7 +44,9 @@ const useAuth = () => {
       try {
         user = await authCtx.createAccount(inputData);
       } catch (err) {
-        setError(err.message);
+        if (err.message.includes("User must have a"))
+          setError("Fill in every form.");
+        else setError(err.message);
         return;
       }
     }

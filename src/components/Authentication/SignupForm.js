@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Card from "../UI/Card";
 import Error from "../UI/Error";
 import classes from "./LoginForm.module.css";
+import signUpClasses from "./SignupForm.module.css";
 import useAuth from "../../hooks/use-auth";
 
 const SignupForm = () => {
@@ -63,7 +64,9 @@ const SignupForm = () => {
           />
         </div>
         <div className={classes.submitButton}>
-          {error && <Error errorMessage={error} />}
+          {error && (
+            <Error errorMessage={error} class={signUpClasses.signupError} />
+          )}
           <button onClick={SignupSubmitHandler}>Submit</button>
         </div>
       </form>

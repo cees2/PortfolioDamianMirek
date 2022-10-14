@@ -57,7 +57,7 @@ const DropDownMenu = () => {
   const dropDownListClasses = authCtx.dropDownIsVisible
     ? `${classes.dropDownList} ${classes.activeDropDownList}`
     : `${classes.dropDownList}`;
-
+  
   const WiderThanTablet = ({ children }) => {
     const wider = useMediaQuery({ minWidth: 769 });
     return wider ? children : null;

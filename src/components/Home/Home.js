@@ -19,8 +19,21 @@ const Home = () => {
               and this is my portfolio. I'm interested in JavaScript and
               framework React. In the future I would like to develop my skills
               in frontend and backend as well. Feel free to register to my app,
-              log in, and test my to do app. Linkedin and github links below.{" "}
+              log in, and test my to do app.
             </p>
+          </div>
+          <div className={classes.technologies}>
+            <h2 className={classes.technogyHeader}>Technologies I use</h2>
+            <ul className={classes.technologyList}>
+              <li>HTML/CSS(css modules)</li>
+              <li>JavaScript ES6</li>
+              <li>
+                React: React Router, Redux(Redux toolkit), Functional
+                compontents, Hooks
+              </li>
+              <li>NodeJS: Express, Mongoose, MongoDB</li>
+              <li>Git</li>
+            </ul>
           </div>
         </aside>
       </div>
